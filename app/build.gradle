@@ -24,6 +24,7 @@ android {
 
 ext {
     supportLibraryVersion = '27.1.1'
+    retrofitVersion = '2.4.0'
 }
 
 dependencies {
@@ -35,6 +36,9 @@ dependencies {
     //facebook
     implementation 'com.facebook.android:facebook-login:[4,5)'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
     //test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
