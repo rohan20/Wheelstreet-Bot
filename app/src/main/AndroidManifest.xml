@@ -40,7 +40,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.HomeActivity"></activity>
+        <activity android:name=".ui.HomeActivity" />
+        <activity android:name=".ui.QuestionsActivity"></activity>
     </application>
 
 </manifest>
