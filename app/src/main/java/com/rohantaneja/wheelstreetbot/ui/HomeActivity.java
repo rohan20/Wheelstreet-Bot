@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
@@ -21,7 +22,7 @@ import com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = HomeActivity.class.getName();
     ActivityHomeBinding mBinding;
@@ -36,6 +37,7 @@ public class HomeActivity extends BaseActivity {
 
     private void initUI() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        mBinding.profileInfoTextView.setOnClickListener(this);
         hideProgressDialog();
 
         fetchProfileDetails();
@@ -115,4 +117,13 @@ public class HomeActivity extends BaseActivity {
         finish();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.profile_info_text_view:
+                Intent i = new Intent(this, QuestionsActivity.class);
+                startActivity(i);
+                break;
+        }
+    }
 }
