@@ -6,16 +6,19 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity">
+        tools:context="com.rohantaneja.wheelstreetbot.ui.HomeActivity">
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/facebook_login_button"
+        <TextView
+            android:id="@+id/profile_info_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Profile Info" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

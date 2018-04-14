@@ -1,18 +1,17 @@
-package com.rohantaneja.wheelstreetbot.ui;
+package com.rohantaneja.wheelstreetbot.ui.auth;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.login.Login;
 import com.facebook.login.LoginResult;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityLoginBinding;
+import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 
 public class LoginActivity extends BaseActivity {
 
