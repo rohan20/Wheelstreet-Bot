@@ -1,9 +1,11 @@
-package com.rohantaneja.wheelstreetbot;
+package com.rohantaneja.wheelstreetbot.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class LoginActivity extends AppCompatActivity {
+import com.rohantaneja.wheelstreetbot.R;
+
+public class LoginActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
