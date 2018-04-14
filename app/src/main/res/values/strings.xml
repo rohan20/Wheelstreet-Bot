@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Wheelstreet Bot</string>
+
+    //facebook
+    <string name="facebook_app_id">618651541812831</string>
+    <string name="fb_login_protocol_scheme">fb618651541812831</string>
 </resources>
