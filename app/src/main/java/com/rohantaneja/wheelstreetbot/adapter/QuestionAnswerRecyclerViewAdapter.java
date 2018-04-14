@@ -10,6 +10,7 @@ import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.adapter.viewholder.QuestionAnswerViewholder;
 import com.rohantaneja.wheelstreetbot.model.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +20,14 @@ public class QuestionAnswerRecyclerViewAdapter extends RecyclerView.Adapter<Ques
     private final Context context;
     private List<Question> questionsList;
 
-    public QuestionAnswerRecyclerViewAdapter(List<Question> questionsList, Context context) {
-        this.questionsList = questionsList;
+    public QuestionAnswerRecyclerViewAdapter(Context context) {
+        questionsList = new ArrayList<>();
         this.context = context;
+    }
+
+    public void updateQuestionAnswerList(List<Question> questionsList) {
+        this.questionsList = questionsList;
+        notifyDataSetChanged();
     }
 
     @Override
