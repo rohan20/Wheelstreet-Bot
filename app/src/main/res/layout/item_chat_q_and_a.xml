@@ -5,7 +5,10 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp">
 
         <ImageView
             android:id="@+id/chat_question_image_view"
@@ -50,7 +53,7 @@
             app:layout_constraintEnd_toStartOf="@id/chat_answer_image_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/chat_answer_image_view"
-            tools:text="I like to play cricket, watch movies, dance, ng, football, basjetbakl, sketch, picasso, retrofit, okhttp and what not" />
+            tools:text="I like to play cricket" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
