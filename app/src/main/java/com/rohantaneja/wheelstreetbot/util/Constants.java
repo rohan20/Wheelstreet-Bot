@@ -11,4 +11,6 @@ public class Constants {
     public static final int TYPE_INTEGER = 2;
     public static final int TYPE_BOOLEAN = 3;
 
+    public static final String BASE_URL = "https://api.wheelstreet.com/v1/test/";
+
 }
