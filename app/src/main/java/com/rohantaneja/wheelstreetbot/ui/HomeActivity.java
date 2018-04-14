@@ -1,13 +1,16 @@
 package com.rohantaneja.wheelstreetbot.ui;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.login.LoginManager;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityHomeBinding;
+import com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity;
 
 public class HomeActivity extends BaseActivity {
 
@@ -21,6 +24,7 @@ public class HomeActivity extends BaseActivity {
 
     private void initUI() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        hideProgressDialog();
     }
 
 
@@ -41,7 +45,14 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void signOut() {
-        
+        showProgressDialog("Signing out...");
+
+        LoginManager.getInstance().logOut();
+
+        //go back to login screen
+        Intent loginIntent = new Intent(this, LoginActivity.class);
+        startActivity(loginIntent);
+        finish();
     }
 
 }

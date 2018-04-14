@@ -12,6 +12,7 @@ import com.facebook.login.LoginResult;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityLoginBinding;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
+import com.rohantaneja.wheelstreetbot.ui.HomeActivity;
 
 public class LoginActivity extends BaseActivity {
 
@@ -26,6 +27,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void initUI() {
+        hideProgressDialog();
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         initFacebookLogin();
@@ -38,18 +40,28 @@ public class LoginActivity extends BaseActivity {
         mBinding.facebookLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+
+                showProgressDialog("Signing in...");
+
                 setResult(RESULT_OK);
                 Log.d(TAG, "onSuccess");
+
+                Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(homeIntent);
+                finish();
+
             }
 
             @Override
             public void onCancel() {
                 setResult(RESULT_CANCELED);
+                showToast("Unable to login");
                 Log.d(TAG, "onCancel");
             }
 
             @Override
             public void onError(FacebookException exception) {
+                showToast("Unable to login");
                 Log.d(TAG, "onError");
             }
         });
