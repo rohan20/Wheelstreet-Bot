@@ -14,6 +14,9 @@ import com.rohantaneja.wheelstreetbot.databinding.ActivityLoginBinding;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.ui.HomeActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginActivity extends BaseActivity {
 
     private static final String TAG = LoginActivity.class.getName();
@@ -37,6 +40,7 @@ public class LoginActivity extends BaseActivity {
         mCallbackManager = CallbackManager.Factory.create();
 
         // Callback registration
+        mBinding.facebookLoginButton.setReadPermissions(getReadPermissions());
         mBinding.facebookLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -65,6 +69,14 @@ public class LoginActivity extends BaseActivity {
                 Log.d(TAG, "onError");
             }
         });
+    }
+
+    private List<String> getReadPermissions() {
+        List<String> readPermissionList = new ArrayList<>();
+        readPermissionList.add("email");
+        readPermissionList.add("public_profile");
+        readPermissionList.add("user_birthday");
+        return readPermissionList;
     }
 
     @Override
