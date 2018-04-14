@@ -16,7 +16,7 @@ public class QuestionsResponse {
     private Long status;
     @SerializedName("data")
     @Expose
-    private List<Question> data = null;
+    private List<QuestionAnswer> data = null;
 
     public Long getStatus() {
         return status;
@@ -26,11 +26,11 @@ public class QuestionsResponse {
         this.status = status;
     }
 
-    public List<Question> getData() {
+    public List<QuestionAnswer> getData() {
         return data;
     }
 
-    public void setData(List<Question> data) {
+    public void setData(List<QuestionAnswer> data) {
         this.data = data;
     }
 }

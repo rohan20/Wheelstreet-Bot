@@ -1,13 +1,12 @@
 package com.rohantaneja.wheelstreetbot.ui;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityQuestionsBinding;
-import com.rohantaneja.wheelstreetbot.model.Question;
+import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
 import com.rohantaneja.wheelstreetbot.model.QuestionsResponse;
 import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
 import com.rohantaneja.wheelstreetbot.util.Constants;
@@ -44,7 +43,7 @@ public class QuestionsActivity extends BaseActivity {
             public void onResponse(Call<QuestionsResponse> call, Response<QuestionsResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "Successful: " + response.body().toString());
-                    List<Question> questionList = response.body().getData();
+                    List<QuestionAnswer> questionAnswerList = response.body().getData();
                     hideProgressDialog();
                 } else {
                     Log.d(TAG, "Not successful: " + response.message());

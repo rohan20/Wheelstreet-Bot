@@ -15,7 +15,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/holo_blue_dark"
-            android:contentDescription="@string/question"
+            android:contentDescription="@string/questionAnswer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +38,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/holo_red_dark"
-            android:contentDescription="@string/question"
+            android:contentDescription="@string/questionAnswer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chat_question_image_view" />
 

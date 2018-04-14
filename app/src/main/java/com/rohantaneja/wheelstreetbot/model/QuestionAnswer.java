@@ -8,7 +8,7 @@ import com.rohantaneja.wheelstreetbot.util.Constants;
  * Created by rohantaneja on 14/04/18.
  */
 
-public class Question {
+public class QuestionAnswer {
 
     @SerializedName("id")
     @Expose
@@ -19,6 +19,8 @@ public class Question {
     @SerializedName("dataType")
     @Expose
     private String dataType;
+
+    private Object answer;
 
     public Long getId() {
         return id;
@@ -40,6 +42,10 @@ public class Question {
         return dataType;
     }
 
+    public Object getAnswer() {
+        return answer;
+    }
+
     public int getAnswerType() {
         if (dataType.equals("boolean"))
             return Constants.TYPE_BOOLEAN;
@@ -55,4 +61,7 @@ public class Question {
         this.dataType = dataType;
     }
 
+    public void setAnswer(Object answer) {
+        this.answer = answer;
+    }
 }

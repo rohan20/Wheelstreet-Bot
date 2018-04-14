@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.adapter.viewholder.QuestionAnswerViewholder;
-import com.rohantaneja.wheelstreetbot.model.Question;
+import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +18,14 @@ import java.util.List;
  */
 public class QuestionAnswerRecyclerViewAdapter extends RecyclerView.Adapter<QuestionAnswerViewholder> {
     private final Context context;
-    private List<Question> questionsList;
+    private List<QuestionAnswer> questionsList;
 
     public QuestionAnswerRecyclerViewAdapter(Context context) {
         questionsList = new ArrayList<>();
         this.context = context;
     }
 
-    public void updateQuestionAnswerList(List<Question> questionsList) {
+    public void updateQuestionAnswerList(List<QuestionAnswer> questionsList) {
         this.questionsList = questionsList;
         notifyDataSetChanged();
     }
@@ -38,7 +38,7 @@ public class QuestionAnswerRecyclerViewAdapter extends RecyclerView.Adapter<Ques
 
     @Override
     public void onBindViewHolder(QuestionAnswerViewholder holder, int position) {
-        Question question = questionsList.get(position);
+        QuestionAnswer questionAnswer = questionsList.get(position);
         //TODO Fill in your logic for binding the view.
     }
 
