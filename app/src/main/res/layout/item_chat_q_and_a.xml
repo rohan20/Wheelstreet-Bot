@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/chat_question_image_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/holo_blue_dark"
+            android:contentDescription="@string/question"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/chat_question_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical|start"
+            android:minHeight="40dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/chat_question_image_view"
+            app:layout_constraintTop_toTopOf="@id/chat_question_image_view"
+            tools:text="Please enter your age" />
+
+        <ImageView
+            android:id="@+id/chat_answer_image_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/holo_red_dark"
+            android:contentDescription="@string/question"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chat_question_image_view" />
+
+        <TextView
+            android:id="@+id/chat_answer_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="center_vertical|end"
+            android:minHeight="40dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/chat_answer_image_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/chat_answer_image_view"
+            tools:text="I like to play cricket, watch movies, dance, ng, football, basjetbakl, sketch, picasso, retrofit, okhttp and what not" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -4,4 +4,5 @@
     //facebook
     <string name="facebook_app_id">618651541812831</string>
     <string name="fb_login_protocol_scheme">fb618651541812831</string>
+    <string name="question">question</string>
 </resources>
