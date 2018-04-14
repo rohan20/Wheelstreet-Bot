@@ -39,7 +39,7 @@ public class QuestionAnswerRecyclerViewAdapter extends RecyclerView.Adapter<Ques
     @Override
     public void onBindViewHolder(QuestionAnswerViewholder holder, int position) {
         QuestionAnswer questionAnswer = questionsList.get(position);
-        //TODO Fill in your logic for binding the view.
+        holder.bindData(questionAnswer);
     }
 
     @Override

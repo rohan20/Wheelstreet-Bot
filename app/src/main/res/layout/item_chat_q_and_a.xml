@@ -55,5 +55,11 @@
             app:layout_constraintTop_toTopOf="@id/chat_answer_image_view"
             tools:text="I like to play cricket" />
 
+        <android.support.constraint.Group
+            android:id="@+id/answer_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="chat_answer_image_view,chat_answer_text_view" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>
