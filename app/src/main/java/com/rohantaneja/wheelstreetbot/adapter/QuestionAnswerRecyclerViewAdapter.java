@@ -23,6 +23,8 @@ public class QuestionAnswerRecyclerViewAdapter extends RecyclerView.Adapter<Ques
     public QuestionAnswerRecyclerViewAdapter(Context context) {
         questionsList = new ArrayList<>();
         this.context = context;
+
+        // TODO: 15/04/18 Retrieve user image url here from SharedPrefs
     }
 
     public void updateQuestionAnswerList(List<QuestionAnswer> questionsList) {
@@ -32,7 +34,7 @@ public class QuestionAnswerRecyclerViewAdapter extends RecyclerView.Adapter<Ques
 
     @Override
     public QuestionAnswerViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_q_and_a, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_question_answer, parent, false);
         return new QuestionAnswerViewholder(v);
     }
 

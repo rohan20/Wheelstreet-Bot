@@ -5,9 +5,11 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityLoginBinding;
@@ -36,6 +38,15 @@ public class LoginActivity extends BaseActivity {
         initFacebookLogin();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //Check if user is already signed in. If yes, skip login screen
+        if (AccessToken.getCurrentAccessToken() != null)
+            navigateToHomeScreen();
+    }
+
     private void initFacebookLogin() {
         mCallbackManager = CallbackManager.Factory.create();
 
@@ -50,9 +61,7 @@ public class LoginActivity extends BaseActivity {
                 setResult(RESULT_OK);
                 Log.d(TAG, "onSuccess");
 
-                Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
-                finish();
+                navigateToHomeScreen();
 
             }
 
@@ -69,6 +78,12 @@ public class LoginActivity extends BaseActivity {
                 Log.d(TAG, "onError");
             }
         });
+    }
+
+    private void navigateToHomeScreen() {
+        Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(homeIntent);
+        finish();
     }
 
     private List<String> getReadPermissions() {
