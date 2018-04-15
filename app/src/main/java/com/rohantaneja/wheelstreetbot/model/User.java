@@ -19,6 +19,7 @@ public class User {
     private String email;
     private String birthday;
     private String gender;
+    private String mobile;
     private String age;
     //initially, age is calculated from dob. But the user can update their age, then there'd be no use of the age calculation from dob
     private String isAgeOverridden;
@@ -58,6 +59,10 @@ public class User {
 
     public String getGender() {
         return gender;
+    }
+
+    public String getMobile() {
+        return mobile;
     }
 
     public String getAge() {
@@ -101,6 +106,10 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public void setAge(String age) {
