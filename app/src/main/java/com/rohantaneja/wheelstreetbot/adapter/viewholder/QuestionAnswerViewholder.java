@@ -33,7 +33,10 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
         } else {
             mBinding.answerGroup.setVisibility(View.VISIBLE);
             mBinding.chatAnswerTextView.setText(questionAnswer.getAnswer().toString());
-            Picasso.get().load(Uri.parse(mAvatarUrl)).into(mBinding.chatAnswerImageView);
+            Picasso.get().load(mAvatarUrl)
+                    .placeholder(R.drawable.ic_account_circle_black_48dp)
+                    .error(R.drawable.ic_account_circle_black_48dp)
+                    .into(mBinding.chatAnswerImageView);
         }
 
         new Handler().postDelayed(new Runnable() {

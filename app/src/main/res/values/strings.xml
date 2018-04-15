@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">Wheelstreet Bot</string>
 
-    //facebook
-    <string name="facebook_app_id">618651541812831</string>
-    <string name="fb_login_protocol_scheme">fb618651541812831</string>
     <string name="questionAnswer">questionAnswer</string>
     <string name="send">send</string>
     <string name="enter_text_here">Enter text here...</string>
+    <string name="hi_name">Hi, %s</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    //facebook
+    <string name="facebook_app_id">618651541812831</string>
+    <string name="fb_login_protocol_scheme">fb618651541812831</string>
 </resources>

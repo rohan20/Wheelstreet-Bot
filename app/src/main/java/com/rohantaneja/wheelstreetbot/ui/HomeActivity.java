@@ -22,6 +22,7 @@ import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity;
 import com.rohantaneja.wheelstreetbot.ui.profile.ProfileActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +42,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private void initUI() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
-        mBinding.profileInfoTextView.setOnClickListener(this);
+        mBinding.surveyButton.setOnClickListener(this);
         hideProgressDialog();
 
         fetchProfileDetails();
@@ -88,12 +89,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
         Uri picture = Uri.parse(user.getJSONObject("picture").getJSONObject("data").getString("url"));
 
-        Log.d(TAG, "id: " + id + "\nname: " + name + "\nemail: " + email + "\nbirthday: " + birthday + "\ngender: " + gender + "\nUri: " + picture.toString());
-        mBinding.profileInfoTextView.setText("id: " + id + "\nname: " + name + "\nemail: " + email + "\nbirthday: " + birthday + "\ngender: " + gender + "\nUri: " + picture.toString());
-
         //save current user's data
         User currentUser = new User(Long.valueOf(id), name, email, birthday, gender, picture.toString());
         Hawk.put(Constants.HAWK_USER_DETAILS, currentUser);
+
+        //set name and avatar for home screen
+        mBinding.hiTextView.setText(getString(R.string.hi_name, name));
+        Picasso.get().load(picture)
+                .placeholder(R.drawable.ic_account_circle_black_48dp)
+                .error(R.drawable.ic_account_circle_black_48dp)
+                .into(mBinding.avatarImageView);
 
         hideProgressDialog();
     }
@@ -138,7 +143,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.profile_info_text_view:
+            case R.id.survey_button:
                 Intent i = new Intent(this, QuestionsActivity.class);
                 startActivity(i);
                 break;
