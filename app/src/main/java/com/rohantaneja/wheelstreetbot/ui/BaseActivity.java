@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.rohantaneja.wheelstreetbot.R;
+import com.rohantaneja.wheelstreetbot.ui.profile.UpdateProfileFragment;
 import com.rohantaneja.wheelstreetbot.ui.profile.ViewProfileFragment;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.rohantaneja.wheelstreetbot.util.Constants.ANIMATION_TYPE;
@@ -49,6 +50,9 @@ public class BaseActivity extends AppCompatActivity {
         switch (fragmentId) {
             case VIEW_PROFILE:
                 fragment = new ViewProfileFragment();
+                break;
+            case UPDATE_PROFILE:
+                fragment = new UpdateProfileFragment();
                 break;
         }
         return fragment;
