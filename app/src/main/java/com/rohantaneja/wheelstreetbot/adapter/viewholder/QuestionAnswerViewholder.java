@@ -23,6 +23,9 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
     public void bindData(QuestionAnswer questionAnswer) {
         if (questionAnswer.getAnswer() == null) {
             mBinding.answerGroup.setVisibility(View.GONE);
+        } else {
+            mBinding.answerGroup.setVisibility(View.VISIBLE);
+            mBinding.chatAnswerTextView.setText(questionAnswer.getAnswer().toString());
         }
 
         mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
