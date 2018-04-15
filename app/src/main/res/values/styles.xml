@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomAlertDialogTheme" parent="AppTheme">
+        <item name="android:windowTitleStyle">@style/CustomAlertDialogTitle</item>
+    </style>
+
 </resources>
