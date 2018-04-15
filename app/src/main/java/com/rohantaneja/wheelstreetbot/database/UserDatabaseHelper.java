@@ -23,17 +23,17 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     private static String SQL_CREATE_USER_TABLE =
             "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
                     UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    UserEntry.COLUMN_ID + " INTEGER," +
+                    UserEntry.COLUMN_ID + " TEXT," +
                     UserEntry.COLUMN_NAME + " TEXT," +
                     UserEntry.COLUMN_MOBILE + " TEXT," +
                     UserEntry.COLUMN_EMAIL + " TEXT," +
-                    UserEntry.COLUMN_GENDER + " INTEGER," +
+                    UserEntry.COLUMN_GENDER + " TEXT," +
                     UserEntry.COLUMN_BIRTHDAY + " TEXT," +
-                    UserEntry.COLUMN_AGE + " INTEGER," +
-                    UserEntry.COLUMN_IS_AGE_OVERRIDDEN + " INTEGER," +
+                    UserEntry.COLUMN_AGE + " TEXT," +
+                    UserEntry.COLUMN_IS_AGE_OVERRIDDEN + " TEXT," +
                     UserEntry.COLUMN_AVATAR_URL + " TEXT," +
                     UserEntry.COLUMN_AVATAR_PATH + " TEXT," +
-                    UserEntry.COLUMN_IS_AVATAR_FROM_PATH + " INTEGER)";
+                    UserEntry.COLUMN_IS_AVATAR_FROM_PATH + " TEXT)";
 
     private static final String SQL_DELETE_USER_TABLE =
             "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
@@ -86,16 +86,16 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         //check is cursor has anything i.e. anything for this is was found in db or not
         if (usersCursor.moveToFirst()) {
             user = new User(
-                    usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_ID)),
+                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_ID)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_NAME)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_EMAIL)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_BIRTHDAY)),
-                    usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_GENDER)),
-                    usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_AGE)),
-                    usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_IS_AGE_OVERRIDDEN)),
+                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_GENDER)),
+                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AGE)),
+                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_IS_AGE_OVERRIDDEN)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AVATAR_URL)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AVATAR_PATH)),
-                    usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_IS_AVATAR_FROM_PATH))
+                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_IS_AVATAR_FROM_PATH))
             );
 
         }
@@ -119,7 +119,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return contentValues;
     }
 
-    public void createUserInDb(User user) {
+    private void createUserInDb(User user) {
         getWritableDatabase().insert(
                 UserEntry.TABLE_NAME,
                 null,
@@ -128,13 +128,16 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //If return value i.e. number of rows updated would be 0 => No user with this id exists. Hence, create new user instead
-    public int updateUserInDb(User user) {
-        return getWritableDatabase().update(
+    public void updateUserInDb(User user) {
+        int numberOfRowsAffected = getWritableDatabase().update(
                 UserEntry.TABLE_NAME,
                 getContentValues(user),
                 UserEntry.COLUMN_ID + "=?",
                 new String[]{String.valueOf(user.getId())}
         );
+
+        if (numberOfRowsAffected == 0)
+            createUserInDb(user);
     }
 
 }
