@@ -10,8 +10,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/wheelstreet_logo"
             app:civ_border_color="@android:color/black"
@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        emailTextViewageTextView<TextView
             android:id="@+id/name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

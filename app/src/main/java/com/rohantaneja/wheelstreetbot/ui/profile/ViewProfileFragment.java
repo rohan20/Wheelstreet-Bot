@@ -2,9 +2,11 @@ package com.rohantaneja.wheelstreetbot.ui.profile;
 
 
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,11 +14,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
+import com.rohantaneja.wheelstreetbot.database.UserDatabaseHelper;
 import com.rohantaneja.wheelstreetbot.databinding.FragmentViewProfileBinding;
+import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.ui.BaseFragment;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.util.StringUtil;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +31,7 @@ import com.rohantaneja.wheelstreetbot.util.Constants;
 public class ViewProfileFragment extends BaseFragment {
 
     private FragmentViewProfileBinding mBinding;
+    private static final String TAG = ViewProfileFragment.class.getName();
 
     @Override
     public String getFragmentName() {
@@ -44,7 +52,48 @@ public class ViewProfileFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_view_profile, container, false);
+        displayUserData();
         return mBinding.getRoot();
+    }
+
+    private void displayUserData() {
+        String userId = ((User) Hawk.get(Constants.HAWK_USER_DETAILS)).getId();
+        UserDatabaseHelper userDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(getActivity());
+        User user = userDatabaseHelper.getUserFromDb(userId);
+
+        hideViewsThatHaveNoData(user);
+    }
+
+    private void hideViewsThatHaveNoData(User user) {
+        if (StringUtil.isNullOrEmpty(user.getName()))
+            mBinding.nameTextView.setVisibility(View.GONE);
+
+        if (StringUtil.isNullOrEmpty(user.getEmail()))
+            mBinding.emailTextView.setVisibility(View.GONE);
+
+        if (StringUtil.isNullOrEmpty(user.getGender()))
+            mBinding.genderTextView.setVisibility(View.GONE);
+
+        if (StringUtil.isNullOrEmpty(user.getAge()))
+            mBinding.ageTextView.setVisibility(View.GONE);
+
+        if (StringUtil.isNullOrEmpty(user.getMobile()))
+            mBinding.mobileTextView.setVisibility(View.GONE);
+
+        setUserData(user);
+    }
+
+    private void setUserData(User user) {
+        mBinding.nameTextView.setText(getString(R.string.display_name, user.getName()));
+        mBinding.emailTextView.setText(getString(R.string.display_email, user.getEmail()));
+        mBinding.genderTextView.setText(getString(R.string.display_gender, user.getGender()));
+        mBinding.ageTextView.setText(getString(R.string.display_age, user.getAge()));
+        mBinding.mobileTextView.setText(getString(R.string.display_mobile_number, user.getMobile()));
+
+        Picasso.get().load(Uri.parse(user.getAvatarUrl()))
+                .placeholder(R.drawable.ic_account_circle_black_48dp)
+                .error(R.drawable.ic_account_circle_black_48dp)
+                .into(mBinding.avatarImageView);
     }
 
     @Override

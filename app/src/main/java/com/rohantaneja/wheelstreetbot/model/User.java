@@ -34,7 +34,7 @@ public class User {
         this.email = email;
         this.birthday = birthday;
         this.gender = gender;
-        this.mobile = gender;
+        this.mobile = mobile;
         this.age = age;
         this.isAgeOverridden = isAgeOverridden;
         this.avatarUrl = avatarUrl;
@@ -59,6 +59,14 @@ public class User {
     }
 
     public String getGender() {
+
+        //To change "male" to "Male" and "female" to "Female"
+        if (gender.equalsIgnoreCase(Constants.GENDER_MALE))
+            gender = Constants.GENDER_MALE;
+
+        else if (gender.equalsIgnoreCase(Constants.GENDER_FEMALE))
+            gender = Constants.GENDER_FEMALE;
+
         return gender;
     }
 

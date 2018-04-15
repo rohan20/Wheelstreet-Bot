@@ -77,7 +77,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                         UserEntry.COLUMN_AVATAR_PATH,
                         UserEntry.COLUMN_IS_AVATAR_FROM_PATH
                 },
-                UserEntry.COLUMN_ID + "=?", new String[]{String.valueOf(userId)},
+                UserEntry.COLUMN_ID + "=?", new String[]{userId},
                 null, null, null
         );
 

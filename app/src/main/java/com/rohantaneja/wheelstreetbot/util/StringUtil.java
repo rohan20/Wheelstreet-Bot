@@ -7,7 +7,7 @@ package com.rohantaneja.wheelstreetbot.util;
 public class StringUtil {
 
     public static boolean isNullOrEmpty(String data) {
-        return !(data == null || data.isEmpty());
+        return (data == null || data.isEmpty());
     }
 
 }

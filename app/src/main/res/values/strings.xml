@@ -6,6 +6,12 @@
     <string name="enter_text_here">Enter text here...</string>
     <string name="hi_name">Hi, %s</string>
 
+    <string name="display_name">Name: %s</string>
+    <string name="display_email">Email: %s</string>
+    <string name="display_gender">Gender: %s</string>
+    <string name="display_age">Age: %s</string>
+    <string name="display_mobile_number">Mobile Number: %s</string>
+
     //facebook
     <string name="facebook_app_id">618651541812831</string>
     <string name="fb_login_protocol_scheme">fb618651541812831</string>
