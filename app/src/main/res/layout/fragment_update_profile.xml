@@ -14,8 +14,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar_image_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="12dp"
                 android:src="@drawable/wheelstreet_logo"
                 app:civ_border_color="@android:color/black"
@@ -140,7 +140,6 @@
                     android:id="@+id/male_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="Male" />
 
                 <RadioButton

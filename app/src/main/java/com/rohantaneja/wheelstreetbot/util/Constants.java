@@ -26,6 +26,8 @@ public class Constants {
     public static final String IS_AVATAR_FROM_PATH_TRUE = "true";
     public static final String IS_AVATAR_FROM_PATH_FALSE = "false";
 
+    public static final int AGE_MIN_VALUE = 14;
+    public static final int AGE_MAX_VALUE = 120;
 
     public enum ANIMATION_TYPE {
         SLIDE, FADE, DEFAULT, NONE
