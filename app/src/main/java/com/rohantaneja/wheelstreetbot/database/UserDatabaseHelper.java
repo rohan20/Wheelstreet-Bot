@@ -28,6 +28,8 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                     UserEntry.COLUMN_EMAIL + " TEXT," +
                     UserEntry.COLUMN_GENDER + " INTEGER," +
                     UserEntry.COLUMN_BIRTHDAY + " TEXT," +
+                    UserEntry.COLUMN_AGE + " INTEGER," +
+                    UserEntry.COLUMN_IS_AGE_OVERRIDDEN + " INTEGER," +
                     UserEntry.COLUMN_AVATAR_URL + " TEXT," +
                     UserEntry.COLUMN_AVATAR_PATH + " TEXT," +
                     UserEntry.COLUMN_IS_AVATAR_FROM_PATH + " INTEGER)";
@@ -67,6 +69,8 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                         UserEntry.COLUMN_MOBILE,
                         UserEntry.COLUMN_EMAIL,
                         UserEntry.COLUMN_GENDER,
+                        UserEntry.COLUMN_AGE,
+                        UserEntry.COLUMN_IS_AGE_OVERRIDDEN,
                         UserEntry.COLUMN_BIRTHDAY,
                         UserEntry.COLUMN_AVATAR_URL,
                         UserEntry.COLUMN_AVATAR_PATH,
@@ -86,11 +90,12 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_EMAIL)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_BIRTHDAY)),
                     usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_GENDER)),
-                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AVATAR_URL))
+                    usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_AGE)),
+                    usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_IS_AGE_OVERRIDDEN)),
+                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AVATAR_URL)),
+                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AVATAR_PATH)),
+                    usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_IS_AVATAR_FROM_PATH))
             );
-
-            user.setAvatarPath(usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AVATAR_PATH)));
-            user.setIsAvatarFromPath(usersCursor.getInt(usersCursor.getColumnIndex(UserEntry.COLUMN_IS_AVATAR_FROM_PATH)));
 
         }
 

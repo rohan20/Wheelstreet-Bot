@@ -22,6 +22,9 @@ public class Constants {
     public static final int GENDER_FEMALE = 99;
     public static final String GENDER_FEMALE_STRING = "Female";
 
+    public static final int IS_AGE_OVERRIDDEN_TRUE = 89;
+    public static final int IS_AGE_OVERRIDDEN_FALSE = 88;
+
     public enum ANIMATION_TYPE {
         SLIDE, FADE, DEFAULT, NONE
     }
