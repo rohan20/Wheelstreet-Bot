@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wheelstreet Bot</string>
+    <string name="app_name">Wheelstreet</string>
 
     <string name="questionAnswer">questionAnswer</string>
     <string name="send">send</string>
