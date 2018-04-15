@@ -19,6 +19,9 @@ public class User {
     private int age;
     private String gender;
     private String avatarUrl;
+    private String avatarPath;
+    //user can update avatar and upload from camera/gallery, then it won't have a url but would have a file path
+    private boolean isAvatarFromPath;
 
     public User(long id, String name, String email, String birthday, String gender, String avatarUrl) {
         this.id = id;
@@ -57,6 +60,14 @@ public class User {
         return avatarUrl;
     }
 
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public boolean isAvatarFromPath() {
+        return isAvatarFromPath;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -83,6 +94,14 @@ public class User {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
+
+    public void setAvatarFromPath(boolean avatarFromPath) {
+        isAvatarFromPath = avatarFromPath;
     }
 
     private int calculateAgeFromDob() {
