@@ -15,9 +15,12 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
+import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityHomeBinding;
+import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity;
+import com.rohantaneja.wheelstreetbot.util.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,6 +89,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
         Log.d(TAG, "id: " + id + "\nname: " + name + "\nemail: " + email + "\nbirthday: " + birthday + "\ngender: " + gender + "\nUri: " + picture.toString());
         mBinding.profileInfoTextView.setText("id: " + id + "\nname: " + name + "\nemail: " + email + "\nbirthday: " + birthday + "\ngender: " + gender + "\nUri: " + picture.toString());
+
+        //save current user's data
+        User currentUser = new User(Long.valueOf(id), name, email, birthday, gender, picture.toString());
+        Hawk.put(Constants.HAWK_USER_DETAILS, currentUser);
 
         hideProgressDialog();
     }

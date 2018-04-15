@@ -13,4 +13,6 @@ public class Constants {
 
     public static final String BASE_URL = "https://api.wheelstreet.com/v1/test/";
 
+    public static final String HAWK_USER_DETAILS = "hawk_user_details";
+
 }
