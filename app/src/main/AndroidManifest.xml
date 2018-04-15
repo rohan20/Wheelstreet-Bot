@@ -43,7 +43,7 @@
         </activity>
         <activity android:name=".ui.HomeActivity" />
         <activity android:name=".ui.QuestionsActivity" />
-        <activity android:name=".ui.ProfileActivity"></activity>
+        <activity android:name=".ui.profile.ProfileActivity"></activity>
     </application>
 
 </manifest>

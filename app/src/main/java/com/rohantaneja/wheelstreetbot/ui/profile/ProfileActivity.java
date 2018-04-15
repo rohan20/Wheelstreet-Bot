@@ -1,4 +1,4 @@
-package com.rohantaneja.wheelstreetbot.ui;
+package com.rohantaneja.wheelstreetbot.ui.profile;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityProfileBinding;
+import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 
 public class ProfileActivity extends BaseActivity {
 
