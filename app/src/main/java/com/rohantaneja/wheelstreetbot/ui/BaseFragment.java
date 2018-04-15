@@ -14,9 +14,11 @@ import com.rohantaneja.wheelstreetbot.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     private Toast toast;
+
+    public abstract String getFragmentName();
 
     protected void showToast(String message) {
         if (getActivity() != null && message != null) {

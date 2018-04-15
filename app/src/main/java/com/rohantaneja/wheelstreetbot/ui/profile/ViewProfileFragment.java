@@ -10,18 +10,23 @@ import android.view.ViewGroup;
 
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.FragmentViewProfileBinding;
+import com.rohantaneja.wheelstreetbot.ui.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ViewProfileFragment extends Fragment {
+public class ViewProfileFragment extends BaseFragment {
 
     private FragmentViewProfileBinding mBinding;
+
+    @Override
+    public String getFragmentName() {
+        return ViewProfileFragment.class.getName();
+    }
 
     public ViewProfileFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
