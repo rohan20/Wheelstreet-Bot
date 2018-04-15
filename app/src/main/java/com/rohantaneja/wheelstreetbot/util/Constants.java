@@ -17,4 +17,11 @@ public class Constants {
 
     public static final int NEXT_QUESTION_DELAY = 750;
 
+    public enum ANIMATION_TYPE {
+        SLIDE, FADE, DEFAULT, NONE
+    }
+
+    public enum FRAGMENTS {
+        VIEW_PROFILE, UPDATE_PROFILE, VIEW_QUESTION_ANSWER, UPDATE_QUESTION_ANSWER
+    }
 }
