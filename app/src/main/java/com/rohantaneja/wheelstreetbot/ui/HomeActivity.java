@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
+import com.rohantaneja.wheelstreetbot.database.UserDatabaseHelper;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityHomeBinding;
 import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity;
@@ -25,7 +27,9 @@ import org.json.JSONObject;
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = HomeActivity.class.getName();
-    ActivityHomeBinding mBinding;
+    private ActivityHomeBinding mBinding;
+    private int mCurrentUserId;
+    private UserDatabaseHelper mUserDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         mBinding.surveyButton.setOnClickListener(this);
         hideProgressDialog();
 
-        fetchProfileDetailsFromFacebook(this);
+        mUserDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(this);
+        fetchUserIdFromFacebook(this);
     }
 
     public void setProfileDetails(JSONObject user) throws JSONException {
@@ -57,26 +62,25 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         }
 
         String gender = null;
-        int genderValue = 0;
         if (user.has("gender")) {
             gender = user.getString("gender");
-
-            if (gender.equalsIgnoreCase(Constants.GENDER_FEMALE_STRING))
-                genderValue = Constants.GENDER_FEMALE;
-            else
-                genderValue = Constants.GENDER_MALE;
         }
 
         Uri picture = Uri.parse(user.getJSONObject("picture").getJSONObject("data").getString("url"));
 
         //save current user's data
-        User currentUser = new User(Long.valueOf(id), name, email, birthday, genderValue, 0, Constants.IS_AGE_OVERRIDDEN_FALSE, picture.toString(), null, Constants.IS_AVATAR_FROM_PATH_FALSE);
+        User currentUser = new User(id, name, email, birthday, gender, "", Constants.IS_AGE_OVERRIDDEN_FALSE, picture.toString(), null, Constants.IS_AVATAR_FROM_PATH_FALSE);
         currentUser.setAge(currentUser.getAge());
-        Hawk.put(Constants.HAWK_USER_DETAILS, currentUser);
+        mUserDatabaseHelper.updateUserInDb(currentUser);
+        setUserDetails(currentUser);
+    }
+
+    public void setUserDetails(User user) {
+        Hawk.put(Constants.HAWK_USER_DETAILS, user);
 
         //set name and avatar for home screen
-        mBinding.hiTextView.setText(getString(R.string.hi_name, name));
-        Picasso.get().load(picture)
+        mBinding.hiTextView.setText(getString(R.string.hi_name, user.getName()));
+        Picasso.get().load(Uri.parse(user.getAvatarUrl()))
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);

@@ -61,7 +61,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //database methods
-    public User getUserFromDb(int userId) {
+    public User getUserFromDb(String userId) {
         Cursor usersCursor = getReadableDatabase().query(
                 UserEntry.TABLE_NAME,
                 new String[]{

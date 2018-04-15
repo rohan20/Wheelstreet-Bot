@@ -13,6 +13,8 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.rohantaneja.wheelstreetbot.R;
+import com.rohantaneja.wheelstreetbot.database.UserDatabaseHelper;
+import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.profile.ProfileActivity;
 import com.rohantaneja.wheelstreetbot.ui.profile.UpdateProfileFragment;
 import com.rohantaneja.wheelstreetbot.ui.profile.ViewProfileFragment;
@@ -74,6 +76,36 @@ public class BaseActivity extends AppCompatActivity {
 
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,email,birthday,gender,picture");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+    public void fetchUserIdFromFacebook(final Context context) {
+        showProgressDialog("Fetching details...");
+
+        final GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                if (context instanceof HomeActivity) {
+                    try {
+                        UserDatabaseHelper userDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(BaseActivity.this);
+                        User user = userDatabaseHelper.getUserFromDb(response.getJSONObject().getString("id"));
+                        if (user == null) {
+                            Log.d(TAG, "from FB");
+                            fetchProfileDetailsFromFacebook(BaseActivity.this);
+                        } else {
+                            Log.d(TAG, "from DB");
+                            ((HomeActivity) context).setUserDetails(user);
+                        }
+                    } catch (JSONException e) {
+                        Log.d(TAG, e.getLocalizedMessage());
+                    }
+                }
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id");
         request.setParameters(parameters);
         request.executeAsync();
     }
