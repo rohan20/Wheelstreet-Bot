@@ -45,30 +45,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         mBinding.surveyButton.setOnClickListener(this);
         hideProgressDialog();
 
-        fetchProfileDetails();
+        fetchProfileDetails(this);
     }
 
-    private void fetchProfileDetails() {
-        showProgressDialog("Fetching details...");
-
-        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                try {
-                    setProfileDetails(response.getJSONObject());
-                } catch (JSONException e) {
-                    Log.d(TAG, e.getLocalizedMessage());
-                }
-            }
-        });
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,email,birthday,gender,picture");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
-
-    private void setProfileDetails(JSONObject user) throws JSONException {
+    public void setProfileDetails(JSONObject user) throws JSONException {
         String id = user.getString("id");
         String name = user.getString("name");
 
@@ -83,14 +63,21 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         }
 
         String gender = null;
+        int genderValue = 0;
         if (user.has("gender")) {
             gender = user.getString("gender");
+
+            if (gender.equalsIgnoreCase(Constants.GENDER_FEMALE_STRING))
+                genderValue = Constants.GENDER_FEMALE;
+            else
+                genderValue = Constants.GENDER_MALE;
         }
 
         Uri picture = Uri.parse(user.getJSONObject("picture").getJSONObject("data").getString("url"));
 
         //save current user's data
-        User currentUser = new User(Long.valueOf(id), name, email, birthday, gender, picture.toString());
+        User currentUser = new User(Long.valueOf(id), name, email, birthday, genderValue, 0, Constants.IS_AGE_OVERRIDDEN_FALSE, picture.toString(), null, Constants.IS_AVATAR_FROM_PATH_FALSE);
+        currentUser.setAge(currentUser.getAge());
         Hawk.put(Constants.HAWK_USER_DETAILS, currentUser);
 
         //set name and avatar for home screen

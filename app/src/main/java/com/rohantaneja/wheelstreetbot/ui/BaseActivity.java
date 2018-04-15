@@ -2,20 +2,30 @@ package com.rohantaneja.wheelstreetbot.ui;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.rohantaneja.wheelstreetbot.R;
+import com.rohantaneja.wheelstreetbot.ui.profile.ProfileActivity;
 import com.rohantaneja.wheelstreetbot.ui.profile.UpdateProfileFragment;
 import com.rohantaneja.wheelstreetbot.ui.profile.ViewProfileFragment;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.rohantaneja.wheelstreetbot.util.Constants.ANIMATION_TYPE;
 import com.rohantaneja.wheelstreetbot.util.Constants.FRAGMENTS;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class BaseActivity extends AppCompatActivity {
 
+    private static final String TAG = BaseActivity.class.getName();
     private ProgressDialog mProgressDialog;
 
     public void showToast(String message) {
@@ -42,6 +52,32 @@ public class BaseActivity extends AppCompatActivity {
             mProgressDialog.dismiss();
         }
     }
+
+    //fetching user's profile data from Facebook
+    public void fetchProfileDetails(final Context context) {
+        showProgressDialog("Fetching details...");
+
+        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    if (context instanceof HomeActivity) {
+                        ((HomeActivity) context).setProfileDetails(response.getJSONObject());
+                    } else if (context instanceof ProfileActivity) {
+//                        ((ProfileActivity) context).setProfileDetails(response.getJSONObject());
+                    }
+                } catch (JSONException e) {
+                    Log.d(TAG, e.getLocalizedMessage());
+                }
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,birthday,gender,picture");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
 
     //methods for adding/replacing fragment
 

@@ -25,6 +25,10 @@ public class Constants {
     public static final int IS_AGE_OVERRIDDEN_TRUE = 89;
     public static final int IS_AGE_OVERRIDDEN_FALSE = 88;
 
+    public static final int IS_AVATAR_FROM_PATH_TRUE = 79;
+    public static final int IS_AVATAR_FROM_PATH_FALSE = 78;
+
+
     public enum ANIMATION_TYPE {
         SLIDE, FADE, DEFAULT, NONE
     }
