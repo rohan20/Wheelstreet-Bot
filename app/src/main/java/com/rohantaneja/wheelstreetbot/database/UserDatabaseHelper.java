@@ -1,5 +1,6 @@
 package com.rohantaneja.wheelstreetbot.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -76,7 +77,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                         UserEntry.COLUMN_AVATAR_PATH,
                         UserEntry.COLUMN_IS_AVATAR_FROM_PATH
                 },
-                UserEntry.COLUMN_ID + "?=", new String[]{String.valueOf(userId)},
+                UserEntry.COLUMN_ID + "=?", new String[]{String.valueOf(userId)},
                 null, null, null
         );
 
@@ -100,6 +101,40 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         }
 
         return user;
+    }
+
+    private ContentValues getContentValues(User user) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(UserEntry.COLUMN_ID, user.getId());
+        contentValues.put(UserEntry.COLUMN_NAME, user.getName());
+        contentValues.put(UserEntry.COLUMN_EMAIL, user.getEmail());
+        contentValues.put(UserEntry.COLUMN_BIRTHDAY, user.getBirthday());
+        contentValues.put(UserEntry.COLUMN_GENDER, user.getGender());
+        contentValues.put(UserEntry.COLUMN_AGE, user.getAge());
+        contentValues.put(UserEntry.COLUMN_IS_AGE_OVERRIDDEN, user.getIsAgeOverridden());
+        contentValues.put(UserEntry.COLUMN_AVATAR_URL, user.getAvatarUrl());
+        contentValues.put(UserEntry.COLUMN_AVATAR_PATH, user.getAvatarPath());
+        contentValues.put(UserEntry.COLUMN_IS_AVATAR_FROM_PATH, user.getIsAvatarFromPath());
+
+        return contentValues;
+    }
+
+    public void createUserInDb(User user) {
+        getWritableDatabase().insert(
+                UserEntry.TABLE_NAME,
+                null,
+                getContentValues(user)
+        );
+    }
+
+    //If return value i.e. number of rows updated would be 0 => No user with this id exists. Hence, create new user instead
+    public int updateUserInDb(User user) {
+        return getWritableDatabase().update(
+                UserEntry.TABLE_NAME,
+                getContentValues(user),
+                UserEntry.COLUMN_ID + "=?",
+                new String[]{String.valueOf(user.getId())}
+        );
     }
 
 }

@@ -56,6 +56,10 @@ public class User {
         return birthday;
     }
 
+    public int getGender() {
+        return gender;
+    }
+
     public int getAge() {
         if (isAgeOverridden == Constants.IS_AGE_OVERRIDDEN_TRUE)
             return age;
@@ -63,8 +67,8 @@ public class User {
         return calculateAgeFromDob();
     }
 
-    public int getGender() {
-        return gender;
+    public int getIsAgeOverridden() {
+        return isAgeOverridden;
     }
 
     public String getAvatarUrl() {
@@ -75,7 +79,7 @@ public class User {
         return avatarPath;
     }
 
-    public int isAvatarFromPath() {
+    public int getIsAvatarFromPath() {
         return isAvatarFromPath;
     }
 
