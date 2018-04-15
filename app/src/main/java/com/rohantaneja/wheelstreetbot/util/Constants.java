@@ -17,6 +17,11 @@ public class Constants {
 
     public static final int NEXT_QUESTION_DELAY = 750;
 
+    public static final int GENDER_MALE = 98;
+    public static final String GENDER_MALE_STRING = "Male";
+    public static final int GENDER_FEMALE = 99;
+    public static final String GENDER_FEMALE_STRING = "Female";
+
     public enum ANIMATION_TYPE {
         SLIDE, FADE, DEFAULT, NONE
     }

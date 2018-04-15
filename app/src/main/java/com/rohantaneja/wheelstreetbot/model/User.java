@@ -2,6 +2,8 @@ package com.rohantaneja.wheelstreetbot.model;
 
 import android.util.Log;
 
+import com.rohantaneja.wheelstreetbot.util.Constants;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,13 +19,13 @@ public class User {
     private String email;
     private String birthday;
     private int age;
-    private String gender;
+    private int gender;
     private String avatarUrl;
     private String avatarPath;
     //user can update avatar and upload from camera/gallery, then it won't have a url but would have a file path
-    private boolean isAvatarFromPath;
+    private int isAvatarFromPath;
 
-    public User(long id, String name, String email, String birthday, String gender, String avatarUrl) {
+    public User(long id, String name, String email, String birthday, int gender, String avatarUrl) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -52,7 +54,7 @@ public class User {
         return calculateAgeFromDob();
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
@@ -64,7 +66,7 @@ public class User {
         return avatarPath;
     }
 
-    public boolean isAvatarFromPath() {
+    public int isAvatarFromPath() {
         return isAvatarFromPath;
     }
 
@@ -88,7 +90,7 @@ public class User {
         this.age = age;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -100,7 +102,7 @@ public class User {
         this.avatarPath = avatarPath;
     }
 
-    public void setAvatarFromPath(boolean avatarFromPath) {
+    public void setIsAvatarFromPath(int avatarFromPath) {
         isAvatarFromPath = avatarFromPath;
     }
 
