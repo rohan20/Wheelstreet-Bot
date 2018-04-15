@@ -69,7 +69,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         Uri picture = Uri.parse(user.getJSONObject("picture").getJSONObject("data").getString("url"));
 
         //save current user's data
-        User currentUser = new User(id, name, email, birthday, gender, "", Constants.IS_AGE_OVERRIDDEN_FALSE, picture.toString(), null, Constants.IS_AVATAR_FROM_PATH_FALSE);
+        User currentUser = new User(id, name, email, birthday, gender, "", "", Constants.IS_AGE_OVERRIDDEN_FALSE, picture.toString(), null, Constants.IS_AVATAR_FROM_PATH_FALSE);
         currentUser.setAge(currentUser.getAge());
         mUserDatabaseHelper.updateUserInDb(currentUser);
         setUserDetails(currentUser);
