@@ -9,8 +9,8 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingBottom="24dp">
+            android:background="@android:color/white"
+            android:padding="24dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar_image_view"

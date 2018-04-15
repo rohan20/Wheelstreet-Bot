@@ -6,20 +6,77 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:padding="24dp"
         tools:context="com.rohantaneja.wheelstreetbot.ui.HomeActivity">
 
         <TextView
-            android:id="@+id/profile_info_text_view"
-            android:layout_width="wrap_content"
+            android:id="@+id/hi_text_view"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:ellipsize="end"
             android:fontFamily="serif"
-            android:padding="16dp"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Hi, Rohan Taneja"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Profile Info" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_image_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/wheelstreet_logo"
+            app:civ_border_color="@android:color/black"
+            app:civ_border_width="0.5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hi_text_view" />
+
+        <TextView
+            android:id="@+id/welcome_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Welcome to Wheelstreet!"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar_image_view" />
+
+        <TextView
+            android:id="@+id/survey_desc_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="To help us serve you better, please take a short survey"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcome_text_view" />
+
+        <Button
+            android:id="@+id/survey_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Take Survey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/survey_desc_text_view" />
+
 
     </android.support.constraint.ConstraintLayout>
 </layout>
