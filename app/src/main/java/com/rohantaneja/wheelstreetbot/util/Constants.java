@@ -17,16 +17,14 @@ public class Constants {
 
     public static final int NEXT_QUESTION_DELAY = 750;
 
-    public static final int GENDER_MALE = 98;
-    public static final String GENDER_MALE_STRING = "Male";
-    public static final int GENDER_FEMALE = 99;
-    public static final String GENDER_FEMALE_STRING = "Female";
+    public static final String GENDER_MALE = "Male";
+    public static final String GENDER_FEMALE = "Female";
 
-    public static final int IS_AGE_OVERRIDDEN_TRUE = 89;
-    public static final int IS_AGE_OVERRIDDEN_FALSE = 88;
+    public static final String IS_AGE_OVERRIDDEN_TRUE = "true";
+    public static final String IS_AGE_OVERRIDDEN_FALSE = "false";
 
-    public static final int IS_AVATAR_FROM_PATH_TRUE = 79;
-    public static final int IS_AVATAR_FROM_PATH_FALSE = 78;
+    public static final String IS_AVATAR_FROM_PATH_TRUE = "true";
+    public static final String IS_AVATAR_FROM_PATH_FALSE = "false";
 
 
     public enum ANIMATION_TYPE {
