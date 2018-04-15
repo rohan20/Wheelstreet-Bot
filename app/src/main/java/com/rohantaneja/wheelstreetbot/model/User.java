@@ -14,20 +14,20 @@ import java.util.Calendar;
 
 public class User {
 
-    private long id;
+    private String id;
     private String name;
     private String email;
     private String birthday;
-    private int gender;
-    private int age;
+    private String gender;
+    private String age;
     //initially, age is calculated from dob. But the user can update their age, then there'd be no use of the age calculation from dob
-    private int isAgeOverridden;
+    private String isAgeOverridden;
     private String avatarUrl;
     private String avatarPath;
     //user can update avatar and upload from camera/gallery, then it won't have a url but would have a file path
-    private int isAvatarFromPath;
+    private String isAvatarFromPath;
 
-    public User(long id, String name, String email, String birthday, int gender, int age, int isAgeOverridden, String avatarUrl, String avatarPath, int isAvatarFromPath) {
+    public User(String id, String name, String email, String birthday, String gender, String age, String isAgeOverridden, String avatarUrl, String avatarPath, String isAvatarFromPath) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -40,7 +40,7 @@ public class User {
         this.isAvatarFromPath = isAvatarFromPath;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -56,18 +56,18 @@ public class User {
         return birthday;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public int getAge() {
-        if (isAgeOverridden == Constants.IS_AGE_OVERRIDDEN_TRUE)
+    public String getAge() {
+        if (isAgeOverridden.equalsIgnoreCase(Constants.IS_AGE_OVERRIDDEN_TRUE))
             return age;
 
         return calculateAgeFromDob();
     }
 
-    public int getIsAgeOverridden() {
+    public String getIsAgeOverridden() {
         return isAgeOverridden;
     }
 
@@ -79,11 +79,11 @@ public class User {
         return avatarPath;
     }
 
-    public int getIsAvatarFromPath() {
+    public String getIsAvatarFromPath() {
         return isAvatarFromPath;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -99,15 +99,15 @@ public class User {
         this.birthday = birthday;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
-    public void setIsAgeOverridden(int isAgeOverridden) {
+    public void setIsAgeOverridden(String isAgeOverridden) {
         this.isAgeOverridden = isAgeOverridden;
     }
 
@@ -119,11 +119,11 @@ public class User {
         this.avatarPath = avatarPath;
     }
 
-    public void setIsAvatarFromPath(int avatarFromPath) {
+    public void setIsAvatarFromPath(String avatarFromPath) {
         isAvatarFromPath = avatarFromPath;
     }
 
-    private int calculateAgeFromDob() {
+    private String calculateAgeFromDob() {
 
         int age = 0;
 
@@ -160,6 +160,6 @@ public class User {
             }
         }
 
-        return age;
+        return String.valueOf(age);
     }
 }

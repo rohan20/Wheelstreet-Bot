@@ -3,17 +3,12 @@ package com.rohantaneja.wheelstreetbot.ui;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
@@ -36,7 +31,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
         initUI();
     }
 
@@ -45,7 +39,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         mBinding.surveyButton.setOnClickListener(this);
         hideProgressDialog();
 
-        fetchProfileDetails(this);
+        fetchProfileDetailsFromFacebook(this);
     }
 
     public void setProfileDetails(JSONObject user) throws JSONException {

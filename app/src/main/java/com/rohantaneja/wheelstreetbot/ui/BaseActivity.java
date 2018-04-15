@@ -54,7 +54,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     //fetching user's profile data from Facebook
-    public void fetchProfileDetails(final Context context) {
+    public void fetchProfileDetailsFromFacebook(final Context context) {
         showProgressDialog("Fetching details...");
 
         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
