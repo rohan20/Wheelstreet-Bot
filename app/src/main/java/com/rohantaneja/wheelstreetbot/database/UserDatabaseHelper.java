@@ -91,6 +91,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_EMAIL)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_BIRTHDAY)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_GENDER)),
+                    usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_MOBILE)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AGE)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_IS_AGE_OVERRIDDEN)),
                     usersCursor.getString(usersCursor.getColumnIndex(UserEntry.COLUMN_AVATAR_URL)),
@@ -110,6 +111,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(UserEntry.COLUMN_EMAIL, user.getEmail());
         contentValues.put(UserEntry.COLUMN_BIRTHDAY, user.getBirthday());
         contentValues.put(UserEntry.COLUMN_GENDER, user.getGender());
+        contentValues.put(UserEntry.COLUMN_MOBILE, user.getMobile());
         contentValues.put(UserEntry.COLUMN_AGE, user.getAge());
         contentValues.put(UserEntry.COLUMN_IS_AGE_OVERRIDDEN, user.getIsAgeOverridden());
         contentValues.put(UserEntry.COLUMN_AVATAR_URL, user.getAvatarUrl());
