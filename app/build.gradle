@@ -42,6 +42,7 @@ dependencies {
     //miscellaneous
     implementation "com.orhanobut:hawk:2.0.1"
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     //test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
