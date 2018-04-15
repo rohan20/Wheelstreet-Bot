@@ -28,12 +28,13 @@ public class User {
     //user can update avatar and upload from camera/gallery, then it won't have a url but would have a file path
     private String isAvatarFromPath;
 
-    public User(String id, String name, String email, String birthday, String gender, String age, String isAgeOverridden, String avatarUrl, String avatarPath, String isAvatarFromPath) {
+    public User(String id, String name, String email, String birthday, String gender, String mobile, String age, String isAgeOverridden, String avatarUrl, String avatarPath, String isAvatarFromPath) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.birthday = birthday;
         this.gender = gender;
+        this.mobile = gender;
         this.age = age;
         this.isAgeOverridden = isAgeOverridden;
         this.avatarUrl = avatarUrl;
