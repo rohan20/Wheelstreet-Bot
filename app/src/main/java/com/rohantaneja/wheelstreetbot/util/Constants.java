@@ -15,4 +15,6 @@ public class Constants {
 
     public static final String HAWK_USER_DETAILS = "hawk_user_details";
 
+    public static final int NEXT_QUESTION_DELAY = 750;
+
 }

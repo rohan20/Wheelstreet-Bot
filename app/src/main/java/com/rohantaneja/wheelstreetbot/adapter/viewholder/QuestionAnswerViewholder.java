@@ -2,11 +2,14 @@ package com.rohantaneja.wheelstreetbot.adapter.viewholder;
 
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ItemQuestionAnswerBinding;
 import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
+import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -16,23 +19,29 @@ import com.squareup.picasso.Picasso;
 public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
 
     private ItemQuestionAnswerBinding mBinding;
-    private String avatarUrl;
+    private String mAvatarUrl;
 
     public QuestionAnswerViewholder(View itemView, String avatarUrl) {
         super(itemView);
         mBinding = DataBindingUtil.bind(itemView);
-        this.avatarUrl = avatarUrl;
+        mAvatarUrl = avatarUrl;
     }
 
-    public void bindData(QuestionAnswer questionAnswer) {
+    public void bindData(final QuestionAnswer questionAnswer) {
         if (questionAnswer.getAnswer() == null) {
             mBinding.answerGroup.setVisibility(View.GONE);
         } else {
             mBinding.answerGroup.setVisibility(View.VISIBLE);
             mBinding.chatAnswerTextView.setText(questionAnswer.getAnswer().toString());
-            Picasso.get().load(Uri.parse(avatarUrl)).into(mBinding.chatAnswerImageView);
+            Picasso.get().load(Uri.parse(mAvatarUrl)).into(mBinding.chatAnswerImageView);
         }
 
-        mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mBinding.chatQuestionImageView.setImageResource(R.drawable.wheelstreet_logo);
+                mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
+            }
+        }, Constants.NEXT_QUESTION_DELAY);
     }
 }

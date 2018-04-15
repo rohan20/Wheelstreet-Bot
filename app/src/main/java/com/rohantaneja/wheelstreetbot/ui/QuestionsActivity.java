@@ -133,8 +133,6 @@ public class QuestionsActivity extends BaseActivity implements View.OnClickListe
         //add the next available question to the list of displayed questions
         questionAnswerList.add(questionsList.get(questionAnswerList.size()));
 
-        // TODO: 15/04/18 Display next question after a small delay
-
         mQuestionAnswerRecyclerViewAdapter.updateQuestionAnswerList(questionAnswerList);
         mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
 
