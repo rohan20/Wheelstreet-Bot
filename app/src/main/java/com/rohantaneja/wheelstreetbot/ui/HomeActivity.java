@@ -20,6 +20,7 @@ import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityHomeBinding;
 import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity;
+import com.rohantaneja.wheelstreetbot.ui.profile.ProfileActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 
 import org.json.JSONException;
@@ -108,9 +109,19 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             case R.id.action_sign_out:
                 signOut();
                 return true;
+
+            case R.id.action_profile:
+                viewProfile();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void viewProfile() {
+        Intent i = new Intent(this, ProfileActivity.class);
+        startActivity(i);
     }
 
     private void signOut() {
