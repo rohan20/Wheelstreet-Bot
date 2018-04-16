@@ -20,4 +20,5 @@
     <string name="valid_answer_integer">Please provide a valid integer value</string>
     <string name="valid_answer_string">This answer cannot be left blank</string>
     <string name="confirm_and_submit">Confirm and Submit</string>
+    <string name="survey_submitted_successfully">Survey submitted successfully. Thank you!</string>
 </resources>
