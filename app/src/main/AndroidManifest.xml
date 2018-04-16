@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.auth.LoginActivity"
-            android:label="Login to Wheelstreet"
+            android:label="Wheelstreet"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
