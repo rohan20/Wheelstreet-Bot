@@ -108,7 +108,7 @@ public class SubmitSurveyFragment extends BaseFragment implements View.OnClickLi
         surveyRequest.setEmail(user.getEmail());
         surveyRequest.setQuestions(mFinishedSurveyList);
 
-        if(!NetworkUtil.isNetworkAvailable()){
+        if(!NetworkUtil.isNetworkAvailable(getActivity())){
             showToast(getString(R.string.no_internet));
             ((BaseActivity) getActivity()).hideProgressDialog();
             return;

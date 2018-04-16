@@ -62,7 +62,7 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
 
         RetrofitAdapter retrofitAdapter = new RetrofitAdapter(Constants.BASE_URL);
 
-        if (!NetworkUtil.isNetworkAvailable()) {
+        if (!NetworkUtil.isNetworkAvailable(this)) {
             showToast(getString(R.string.no_internet));
             hideProgressDialog();
             return;
