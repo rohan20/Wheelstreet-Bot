@@ -9,7 +9,9 @@ import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ItemQuestionAnswerBinding;
 import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
+import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.util.Utils;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -63,7 +65,7 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
 
         //set answer
         mBinding.chatAnswerTextView.setText(String.valueOf(questionAnswer.getAnswer()));
-        Picasso.get().load(mAvatarUrl)
+        Picasso.get().load(Utils.getPicassoPath((User) Hawk.get(Constants.HAWK_USER_DETAILS)))
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.chatAnswerImageView);

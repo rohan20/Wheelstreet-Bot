@@ -124,12 +124,14 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
 
             case R.id.tv_use_facebook_image:
                 mBinding.bottomSheetMembers.dismissSheet();
-                Picasso.get().load(mUser.getAvatarUrl())
+
+                mUser.setIsAvatarFromPath(Constants.IS_AVATAR_FROM_PATH_FALSE);
+
+                Picasso.get().load(Utils.getPicassoPath(mUser))
                         .placeholder(R.drawable.ic_account_circle_black_48dp)
                         .error(R.drawable.ic_account_circle_black_48dp)
                         .into(mBinding.avatarImageView);
 
-                mUser.setIsAvatarFromPath(Constants.IS_AVATAR_FROM_PATH_FALSE);
                 break;
 
             case R.id.tv_take_photo:
@@ -245,13 +247,14 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     @Override
     public void success(String name, String path) {
 
-        Picasso.get().load(Constants.PICASSO_FILE_PREFIX + path)
+        mUser.setAvatarPath(path);
+        mUser.setIsAvatarFromPath(Constants.IS_AVATAR_FROM_PATH_TRUE);
+
+        Picasso.get().load(Utils.getPicassoPath(mUser))
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);
 
-        mUser.setAvatarPath(Constants.PICASSO_FILE_PREFIX + path);
-        mUser.setIsAvatarFromPath(Constants.IS_AVATAR_FROM_PATH_TRUE);
     }
 
     @Override

@@ -174,7 +174,8 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
             Hawk.put(Constants.IS_SURVEY_COMPLETE, false);
             displayNextQuestion();
         } else {
-            mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
+//            mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
+            mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size());
             navigateToConfirmAndSubmitSurvey();
         }
     }
@@ -193,7 +194,8 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         questionAnswerList.add(questionsList.get(questionAnswerList.size()));
 
         mQuestionAnswerRecyclerViewAdapter.updateQuestionAnswerList(questionAnswerList);
-        mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
+//        mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
+        mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size());
 
     }
 

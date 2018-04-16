@@ -38,7 +38,7 @@ public class User {
         this.age = age;
         this.isAgeOverridden = isAgeOverridden;
         this.avatarUrl = avatarUrl;
-        this.avatarPath = avatarUrl;
+        this.avatarPath = avatarPath;
         this.isAvatarFromPath = isAvatarFromPath;
     }
 
@@ -145,8 +145,6 @@ public class User {
 
         int age = 0;
 
-        Log.d(getClass().getName(), "birthday: " + birthday);
-
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         Calendar dateOfBirthCalendar = Calendar.getInstance();
 
@@ -158,17 +156,12 @@ public class User {
 
         Calendar todayCalendar = Calendar.getInstance();
         int currentYear = todayCalendar.get(Calendar.YEAR);
-        Log.d(getClass().getName(), "currentYear: " + currentYear);
         int dobYear = dateOfBirthCalendar.get(Calendar.YEAR);
-        Log.d(getClass().getName(), "dobYear: " + dobYear);
         age = currentYear - dobYear;
-        Log.d(getClass().getName(), "age: " + age);
 
         // if dob is month or day is behind today's month or day, reduce age by 1
         int currentMonth = todayCalendar.get(Calendar.MONTH);
-        Log.d(getClass().getName(), "currentMonth: " + currentMonth);
         int dobMonth = dateOfBirthCalendar.get(Calendar.MONTH);
-        Log.d(getClass().getName(), "dobMonth: " + dobMonth);
 
         if (dobMonth > currentMonth) {
             // this year shouldn't be counted!
