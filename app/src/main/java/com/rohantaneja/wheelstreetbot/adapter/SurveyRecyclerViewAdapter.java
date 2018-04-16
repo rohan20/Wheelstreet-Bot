@@ -24,20 +24,20 @@ public class SurveyRecyclerViewAdapter extends RecyclerView.Adapter<QuestionAnsw
 
     private final Context context;
     private List<QuestionAnswer> questionsList;
-    private String userAvatarUrl;
+    private User user;
     private boolean isFromCompletedSurvey;
 
     public SurveyRecyclerViewAdapter(Context context, boolean isFromCompletedSurvey) {
         this.context = context;
         this.isFromCompletedSurvey = isFromCompletedSurvey;
-        userAvatarUrl = ((User) Hawk.get(Constants.HAWK_USER_DETAILS)).getAvatarUrl();
+        user = Hawk.get(Constants.HAWK_USER_DETAILS);
     }
 
     public SurveyRecyclerViewAdapter(Context context) {
         questionsList = new ArrayList<>();
         this.context = context;
         this.isFromCompletedSurvey = false;
-        userAvatarUrl = ((User) Hawk.get(Constants.HAWK_USER_DETAILS)).getAvatarUrl();
+        user = Hawk.get(Constants.HAWK_USER_DETAILS);
     }
 
     public void updateQuestionAnswerList(List<QuestionAnswer> questionsList) {
@@ -48,7 +48,7 @@ public class SurveyRecyclerViewAdapter extends RecyclerView.Adapter<QuestionAnsw
     @Override
     public QuestionAnswerViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_question_answer, parent, false);
-        return new QuestionAnswerViewholder(v, userAvatarUrl, isFromCompletedSurvey);
+        return new QuestionAnswerViewholder(v, user, isFromCompletedSurvey);
     }
 
     @Override

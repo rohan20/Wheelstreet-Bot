@@ -21,35 +21,32 @@ import com.squareup.picasso.Picasso;
 public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
 
     private ItemQuestionAnswerBinding mBinding;
-    private String mAvatarUrl;
+    private User mUser;
     private boolean mIsFromCompletedSurvey;
 
-    public QuestionAnswerViewholder(View itemView, String avatarUrl, boolean isFromCompletedSurvey) {
+    public QuestionAnswerViewholder(View itemView, User user, boolean isFromCompletedSurvey) {
         super(itemView);
         mBinding = DataBindingUtil.bind(itemView);
-        mAvatarUrl = avatarUrl;
+        mUser = user;
         mIsFromCompletedSurvey = isFromCompletedSurvey;
     }
 
-    public void bindData(final QuestionAnswer questionAnswer) {
+    public void bindData(QuestionAnswer questionAnswer) {
         if (mIsFromCompletedSurvey)
             bindCompletedSurveyData(questionAnswer);
         else
             bindOngoingSurveyData(questionAnswer);
     }
 
-    private void bindOngoingSurveyData(final QuestionAnswer questionAnswer) {
+    private void bindOngoingSurveyData(QuestionAnswer questionAnswer) {
         if (questionAnswer.getAnswer() == null) {
             mBinding.answerGroup.setVisibility(View.GONE);
         } else {
             mBinding.answerGroup.setVisibility(View.VISIBLE);
-            mBinding.chatAnswerTextView.setText(questionAnswer.getAnswer().toString());
-            Picasso.get().load(mAvatarUrl)
-                    .placeholder(R.drawable.ic_account_circle_black_48dp)
-                    .error(R.drawable.ic_account_circle_black_48dp)
-                    .into(mBinding.chatAnswerImageView);
+            setAnswer(questionAnswer);
         }
 
+        //check if current question requires delay or not
         if (Hawk.contains(Constants.ONGOING_SURVEY_QUESTIONS_LIST)) {
             setQuestion(questionAnswer);
         } else {
@@ -59,16 +56,13 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
     }
 
     private void bindCompletedSurveyData(QuestionAnswer questionAnswer) {
-        //set question
+        setQuestion(questionAnswer);
+        setAnswer(questionAnswer);
+    }
+
+    private void setQuestion(QuestionAnswer questionAnswer) {
         mBinding.chatQuestionImageView.setImageResource(R.drawable.wheelstreet_logo);
         mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
-
-        //set answer
-        mBinding.chatAnswerTextView.setText(String.valueOf(questionAnswer.getAnswer()));
-        Picasso.get().load(Utils.getPicassoPath((User) Hawk.get(Constants.HAWK_USER_DETAILS)))
-                .placeholder(R.drawable.ic_account_circle_black_48dp)
-                .error(R.drawable.ic_account_circle_black_48dp)
-                .into(mBinding.chatAnswerImageView);
     }
 
     private void addDelayToQuestions(final QuestionAnswer questionAnswer) {
@@ -80,8 +74,13 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
         }, Constants.NEXT_QUESTION_DELAY);
     }
 
-    private void setQuestion(QuestionAnswer questionAnswer) {
-        mBinding.chatQuestionImageView.setImageResource(R.drawable.wheelstreet_logo);
-        mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
+
+    private void setAnswer(QuestionAnswer questionAnswer) {
+        mBinding.chatAnswerTextView.setText(String.valueOf(questionAnswer.getAnswer()));
+
+        Picasso.get().load(Utils.getPicassoPath(mUser))
+                .placeholder(R.drawable.ic_account_circle_black_48dp)
+                .error(R.drawable.ic_account_circle_black_48dp)
+                .into(mBinding.chatAnswerImageView);
     }
 }

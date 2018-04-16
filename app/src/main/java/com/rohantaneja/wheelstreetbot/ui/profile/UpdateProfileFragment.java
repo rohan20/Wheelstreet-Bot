@@ -173,13 +173,14 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
             mUser.setName(mBinding.nameEditText.getText().toString());
             mUser.setEmail(mBinding.emailEditText.getText().toString());
             mUser.setMobile(mBinding.mobileEditText.getText().toString());
-            mUser.setAge(String.valueOf(mBinding.ageNumberPicker.getValue()));
 
             //check if age was changed by the User manually
-            if (!String.valueOf(mBinding.ageNumberPicker.getValue()).equalsIgnoreCase(mUser.getAge()))
-                mUser.setIsAgeOverridden(Constants.IS_AGE_OVERRIDDEN_TRUE);
-            else
+            if (String.valueOf(mBinding.ageNumberPicker.getValue()).equalsIgnoreCase(mUser.getAge()))
                 mUser.setIsAgeOverridden(Constants.IS_AGE_OVERRIDDEN_FALSE);
+            else
+                mUser.setIsAgeOverridden(Constants.IS_AGE_OVERRIDDEN_TRUE);
+            
+            mUser.setAge(String.valueOf(mBinding.ageNumberPicker.getValue()));
 
             //set gender if selected by user
             if (!StringUtil.isNullOrEmpty(mUser.getGender())) {
