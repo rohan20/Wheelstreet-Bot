@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.HomeActivity" />
-        <activity android:name=".ui.SurveyActivity" />
+        <activity android:name=".ui.survey.SurveyActivity" />
         <activity android:name=".ui.profile.ProfileActivity"></activity>
     </application>
 

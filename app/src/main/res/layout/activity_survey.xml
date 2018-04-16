@@ -9,7 +9,7 @@
         android:background="@android:color/white"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        tools:context="com.rohantaneja.wheelstreetbot.ui.SurveyActivity">
+        tools:context="com.rohantaneja.wheelstreetbot.ui.survey.SurveyActivity">
 
         <ImageView
             android:id="@+id/send_image_view"
@@ -21,19 +21,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <EditText
-            android:id="@+id/answer_edit_text"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/answer_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            android:background="@android:color/transparent"
-            android:hint="@string/enter_text_here"
-            android:inputType="textCapSentences"
             android:paddingEnd="0dp"
             android:paddingStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/send_image_view"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/answer_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="@string/enter_text_here"
+                android:inputType="textCapSentences" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <View
             android:id="@+id/divider_view"

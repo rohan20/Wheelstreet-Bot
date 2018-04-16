@@ -1,4 +1,4 @@
-package com.rohantaneja.wheelstreetbot.ui;
+package com.rohantaneja.wheelstreetbot.ui.survey;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -7,11 +7,11 @@ import android.view.View;
 
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.adapter.QuestionAnswerRecyclerViewAdapter;
-import com.rohantaneja.wheelstreetbot.databinding.ActivityQuestionsBinding;
 import com.rohantaneja.wheelstreetbot.databinding.ActivitySurveyBinding;
 import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
 import com.rohantaneja.wheelstreetbot.model.QuestionsResponse;
 import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
+import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 
 import java.util.ArrayList;

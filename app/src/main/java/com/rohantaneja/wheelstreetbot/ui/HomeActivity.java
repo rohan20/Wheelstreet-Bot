@@ -16,6 +16,7 @@ import com.rohantaneja.wheelstreetbot.databinding.ActivityHomeBinding;
 import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity;
 import com.rohantaneja.wheelstreetbot.ui.profile.ProfileActivity;
+import com.rohantaneja.wheelstreetbot.ui.survey.SurveyActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.squareup.picasso.Picasso;
 
