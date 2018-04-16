@@ -57,6 +57,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
 
         mBinding.updateButton.setOnClickListener(this);
         mBinding.cancelButton.setOnClickListener(this);
+        mBinding.avatarImageView.setOnClickListener(this);
 
         String userId = ((User) Hawk.get(Constants.HAWK_USER_DETAILS)).getId();
         UserDatabaseHelper userDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(getActivity());

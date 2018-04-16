@@ -44,6 +44,7 @@ dependencies {
     implementation "com.orhanobut:hawk:2.0.1"
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.flipboard:bottomsheet-core:1.5.3'
     //test
     implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
