@@ -3,6 +3,7 @@ package com.rohantaneja.wheelstreetbot.model.pojo.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
+import com.rohantaneja.wheelstreetbot.util.Constants;
 
 import java.util.List;
 
@@ -71,6 +72,30 @@ public class SubmittedSurveyRequest {
     }
 
     public void setQuestions(List<QuestionAnswer> questions) {
+
+        for (QuestionAnswer questionAnswer : questions) {
+            switch (questionAnswer.getAnswerType()) {
+                case Constants.TYPE_BOOLEAN:
+                    if (questionAnswer.getAnswer().toString().equalsIgnoreCase("yes"))
+                        questionAnswer.setAnswer(true);
+                    else
+                        questionAnswer.setAnswer(false);
+                    break;
+
+                case Constants.TYPE_INTEGER:
+                    questionAnswer.setAnswer(Long.parseLong(String.valueOf(questionAnswer.getAnswer())));
+                    break;
+
+                case Constants.TYPE_FLOAT:
+                    questionAnswer.setAnswer(Float.parseFloat(String.valueOf(questionAnswer.getAnswer())));
+                    break;
+
+                default:
+                    questionAnswer.setAnswer(questionAnswer.getAnswer().toString());
+                    break;
+            }
+        }
+
         this.questions = questions;
     }
 
