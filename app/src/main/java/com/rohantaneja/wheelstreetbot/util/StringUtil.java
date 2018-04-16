@@ -21,13 +21,7 @@ public class StringUtil {
     }
 
     public static boolean isValidMobileNumber(String mobileNumber) {
-        if (isNullOrEmpty(mobileNumber))
-            return false;
-
-        if (isValidLongValue(mobileNumber))
-            return true;
-
-        return false;
+        return Pattern.compile("^([0-9]{10})$").matcher(mobileNumber).find();
     }
 
     public static boolean isValidLongValue(String s) {

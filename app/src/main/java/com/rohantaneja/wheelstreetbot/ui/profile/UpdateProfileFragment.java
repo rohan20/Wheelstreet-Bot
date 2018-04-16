@@ -20,6 +20,7 @@ import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.BaseFragment;
 import com.rohantaneja.wheelstreetbot.util.AlertUtil;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.util.StringUtil;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -113,6 +114,80 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     }
 
     private void updateProfileDetails() {
-        
+
+        if (isNewDataValid()) {
+
+            mUser.setName(mBinding.nameEditText.getText().toString());
+            mUser.setEmail(mBinding.emailEditText.getText().toString());
+            mUser.setMobile(mBinding.mobileEditText.getText().toString());
+            mUser.setAge(String.valueOf(mBinding.ageNumberPicker.getValue()));
+
+            //check if age was changed by the User manually
+            if (!String.valueOf(mBinding.ageNumberPicker.getValue()).equalsIgnoreCase(mUser.getAge()))
+                mUser.setIsAgeOverridden(Constants.IS_AGE_OVERRIDDEN_TRUE);
+            else
+                mUser.setIsAgeOverridden(Constants.IS_AGE_OVERRIDDEN_FALSE);
+
+            //set gender if selected by user
+            if (!StringUtil.isNullOrEmpty(mUser.getGender())) {
+                mUser.setGender(mBinding.femaleRadioButton.isChecked() ? Constants.GENDER_FEMALE : Constants.GENDER_MALE);
+            }
+
+            // TODO: 16/04/18 check if avatar is from storage or facebook url
+//            mUser.setAvatarPath();
+//            mUser.setIsAvatarFromPath();
+
+            UserDatabaseHelper userDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(getActivity());
+            userDatabaseHelper.updateUserInDb(mUser);
+
+            showToast("Profile Updated");
+            Hawk.put(Constants.FROM_UPDATE_PROFILE, true);
+
+            getActivity().finish();
+        }
+    }
+
+    private boolean isNewDataValid() {
+
+        //check email and name (mandatory fields)
+        if (!(isValidName() & isValidEmail()))
+            return false;
+
+        //check if mobile number is a valid one
+        if (StringUtil.isNullOrEmpty(mBinding.mobileEditText.getText().toString())) {
+            mBinding.mobileTextInputLayout.setErrorEnabled(false);
+            mBinding.mobileTextInputLayout.setError("");
+            return true;
+        } else if (StringUtil.isValidMobileNumber(mBinding.mobileEditText.getText().toString())) {
+            mBinding.mobileTextInputLayout.setErrorEnabled(true);
+            mBinding.mobileTextInputLayout.setError("Invalid Mobile Number");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidName() {
+        if (StringUtil.isNullOrEmpty(mBinding.nameEditText.getText().toString())) {
+            mBinding.nameTextInputLayout.setErrorEnabled(true);
+            mBinding.nameTextInputLayout.setError("Invalid Name");
+            return false;
+        } else {
+            mBinding.nameTextInputLayout.setErrorEnabled(false);
+            mBinding.nameTextInputLayout.setError("");
+            return true;
+        }
+    }
+
+    private boolean isValidEmail() {
+        if (!StringUtil.isValidEmail(mBinding.emailEditText.getText().toString())) {
+            mBinding.emailTextInputLayout.setErrorEnabled(true);
+            mBinding.emailTextInputLayout.setError("Invalid Email");
+            return false;
+        } else {
+            mBinding.emailTextInputLayout.setErrorEnabled(false);
+            mBinding.emailTextInputLayout.setError("");
+            return true;
+        }
     }
 }

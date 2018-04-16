@@ -24,7 +24,7 @@ public abstract class BaseFragment extends Fragment {
         if (getActivity() != null && message != null) {
             if (toast != null)
                 toast.cancel();
-            toast = Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG);
+            toast = Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_SHORT);
             toast.show();
         }
     }

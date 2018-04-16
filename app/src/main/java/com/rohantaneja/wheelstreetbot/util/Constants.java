@@ -29,6 +29,8 @@ public class Constants {
     public static final int AGE_MIN_VALUE = 14;
     public static final int AGE_MAX_VALUE = 120;
 
+    public static final String FROM_UPDATE_PROFILE = "from_update_profile";
+
     public enum ANIMATION_TYPE {
         SLIDE, FADE, DEFAULT, NONE
     }
