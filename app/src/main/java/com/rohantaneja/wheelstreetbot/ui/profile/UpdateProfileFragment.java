@@ -113,6 +113,6 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     }
 
     private void updateProfileDetails() {
-
+        
     }
 }
