@@ -15,6 +15,7 @@ import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.rohantaneja.wheelstreetbot.util.Constants.FRAGMENTS;
+import com.rohantaneja.wheelstreetbot.util.NetworkUtil;
 import com.rohantaneja.wheelstreetbot.util.StringUtil;
 
 import java.util.ArrayList;
@@ -60,6 +61,12 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         showProgressDialog("Fetching data, please wait...");
 
         RetrofitAdapter retrofitAdapter = new RetrofitAdapter(Constants.BASE_URL);
+
+        if(!NetworkUtil.isNetworkAvailable()){
+            showToast(getString(R.string.no_internet));
+            return;
+        }
+
         retrofitAdapter.getWheelstreetAPI().getQuestions().enqueue(new Callback<QuestionsResponse>() {
             @Override
             public void onResponse(Call<QuestionsResponse> call, Response<QuestionsResponse> response) {

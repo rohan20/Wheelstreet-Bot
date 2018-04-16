@@ -6,6 +6,9 @@ import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import android.widget.Toast;
+
+import com.rohantaneja.wheelstreetbot.R;
 
 /**
  * Created by rohantaneja on 16/04/18.

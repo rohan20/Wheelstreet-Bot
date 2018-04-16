@@ -21,6 +21,7 @@ import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.ui.BaseFragment;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.util.NetworkUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,11 @@ public class SubmitSurveyFragment extends BaseFragment implements View.OnClickLi
         surveyRequest.setAge(user.getAge());
         surveyRequest.setEmail(user.getEmail());
         surveyRequest.setQuestions(mFinishedSurveyList);
+
+        if(!NetworkUtil.isNetworkAvailable()){
+            showToast(getString(R.string.no_internet));
+            return;
+        }
 
         retrofitAdapter.getWheelstreetAPI().submitSurvey(surveyRequest).enqueue(new Callback<SubmittedSurveyResponse>() {
             @Override

@@ -26,4 +26,5 @@
     <string name="take_survey">Take Survey</string>
     <string name="continue_survey_desc">Please continue the survey from where you left off...</string>
     <string name="continue_survey">Continue Survey</string>
+    <string name="no_internet">Please connect to the internet.</string>
 </resources>
