@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +16,27 @@ import android.view.ViewGroup;
 import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.database.UserDatabaseHelper;
+import com.rohantaneja.wheelstreetbot.databinding.BottomsheetUpdateAvatarBinding;
 import com.rohantaneja.wheelstreetbot.databinding.FragmentUpdateProfileBinding;
 import com.rohantaneja.wheelstreetbot.model.User;
+import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.ui.BaseFragment;
 import com.rohantaneja.wheelstreetbot.util.AlertUtil;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.util.ImagePickerUtils;
+import com.rohantaneja.wheelstreetbot.util.PermissionUtils;
 import com.rohantaneja.wheelstreetbot.util.StringUtil;
 import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UpdateProfileFragment extends BaseFragment implements View.OnClickListener {
+public class UpdateProfileFragment extends BaseFragment implements View.OnClickListener, ImagePickerUtils.OnImagePickerListener {
 
+    private BottomsheetUpdateAvatarBinding mBottomSheetBinding;
     private FragmentUpdateProfileBinding mBinding;
     private User mUser;
+    private static final String TAG = UpdateProfileFragment.class.getName();
 
     @Override
     public String getFragmentName() {
@@ -55,9 +62,16 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
 
     private void displayUserData() {
 
+        mBottomSheetBinding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.bottomsheet_update_avatar, mBinding.bottomSheetMembers, false);
+
         mBinding.updateButton.setOnClickListener(this);
         mBinding.cancelButton.setOnClickListener(this);
         mBinding.avatarImageView.setOnClickListener(this);
+
+        mBottomSheetBinding.tvCancel.setOnClickListener(this);
+        mBottomSheetBinding.tvTakePhoto.setOnClickListener(this);
+        mBottomSheetBinding.tvFromGallery.setOnClickListener(this);
+        mBottomSheetBinding.tvUseFacebookImage.setOnClickListener(this);
 
         String userId = ((User) Hawk.get(Constants.HAWK_USER_DETAILS)).getId();
         UserDatabaseHelper userDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(getActivity());
@@ -97,8 +111,44 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
             case R.id.cancel_button:
                 cancelProfileDetails();
                 break;
+
+            case R.id.avatar_image_view:
+                showImageSelector();
+                break;
+
+            case R.id.tv_cancel:
+                mBinding.bottomSheetMembers.dismissSheet();
+                break;
+
+            case R.id.tv_use_facebook_image:
+                mBinding.bottomSheetMembers.dismissSheet();
+                Picasso.get().load(mUser.getAvatarUrl())
+                        .placeholder(R.drawable.ic_account_circle_black_48dp)
+                        .error(R.drawable.ic_account_circle_black_48dp)
+                        .into(mBinding.avatarImageView);
+
+                mUser.setIsAvatarFromPath(Constants.IS_AVATAR_FROM_PATH_FALSE);
+                break;
+
+            case R.id.tv_take_photo:
+                mBinding.bottomSheetMembers.dismissSheet();
+                ImagePickerUtils.add(true, getActivity().getSupportFragmentManager(), this);
+                break;
+
+            case R.id.tv_from_gallery:
+                mBinding.bottomSheetMembers.dismissSheet();
+                ImagePickerUtils.add(false, getActivity().getSupportFragmentManager(), this);
+                break;
         }
     }
+
+    public void showImageSelector() {
+        if (new PermissionUtils((BaseActivity) getActivity()).checkForImagePermission())
+            mBinding.bottomSheetMembers.showWithSheetView(mBottomSheetBinding.getRoot());
+        else
+            showToast("Permission not granted");
+    }
+
 
     private void cancelProfileDetails() {
         AlertUtil.createYesNoAlert(getActivity(), "Warning!", "This action will result in losing the entered data. Are you sure you want to proceeed?", new AlertUtil.OnAlertClickListener() {
@@ -134,10 +184,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
                 mUser.setGender(mBinding.femaleRadioButton.isChecked() ? Constants.GENDER_FEMALE : Constants.GENDER_MALE);
             }
 
-            // TODO: 16/04/18 check if avatar is from storage or facebook url
-//            mUser.setAvatarPath();
-//            mUser.setIsAvatarFromPath();
-
+            //save updated user to database
             UserDatabaseHelper userDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(getActivity());
             userDatabaseHelper.updateUserInDb(mUser);
 
@@ -193,5 +240,23 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
             mBinding.emailTextInputLayout.setError("");
             return true;
         }
+    }
+
+    @Override
+    public void success(String name, String path) {
+
+        Picasso.get().load(Uri.parse(path))
+                .placeholder(R.drawable.ic_account_circle_black_48dp)
+                .error(R.drawable.ic_account_circle_black_48dp)
+                .into(mBinding.avatarImageView);
+
+        mUser.setAvatarPath(path);
+        mUser.setIsAvatarFromPath(Constants.IS_AVATAR_FROM_PATH_TRUE);
+    }
+
+    @Override
+    public void fail(String message) {
+        Log.d(TAG, "Failed to update avatar");
+        showToast("Failed to update avatar");
     }
 }

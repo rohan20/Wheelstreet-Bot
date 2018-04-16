@@ -24,7 +24,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by rohantaneja on 16/04/18.
  */
 
-public class ImagePickerUtils extends Fragment {
+public class ImagePickerUtils extends android.support.v4.app.Fragment {
 
     public interface OnImagePickerListener {
 
@@ -41,8 +41,8 @@ public class ImagePickerUtils extends Fragment {
     private Boolean isCamera;
     private String mediaPath;
 
-    public static void add(boolean isCamera, @NonNull FragmentManager manager, @NonNull OnImagePickerListener listener) {
-        FragmentTransaction transaction = manager.beginTransaction();
+    public static void add(boolean isCamera, @NonNull android.support.v4.app.FragmentManager manager, @NonNull OnImagePickerListener listener) {
+        android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(ImagePickerUtils.newInstance(isCamera, listener), TAG);
         transaction.commit();
     }

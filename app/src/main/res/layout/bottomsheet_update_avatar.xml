@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/cl_gallery_actions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
