@@ -1,35 +1,34 @@
 package com.rohantaneja.wheelstreetbot.ui.profile;
 
 
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 
 import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.database.UserDatabaseHelper;
 import com.rohantaneja.wheelstreetbot.databinding.FragmentUpdateProfileBinding;
-import com.rohantaneja.wheelstreetbot.databinding.FragmentViewProfileBinding;
 import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.BaseFragment;
+import com.rohantaneja.wheelstreetbot.util.AlertUtil;
 import com.rohantaneja.wheelstreetbot.util.Constants;
-import com.rohantaneja.wheelstreetbot.util.StringUtil;
 import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UpdateProfileFragment extends BaseFragment {
+public class UpdateProfileFragment extends BaseFragment implements View.OnClickListener {
 
     private FragmentUpdateProfileBinding mBinding;
+    private User mUser;
 
     @Override
     public String getFragmentName() {
@@ -54,34 +53,66 @@ public class UpdateProfileFragment extends BaseFragment {
     }
 
     private void displayUserData() {
+
+        mBinding.updateButton.setOnClickListener(this);
+        mBinding.cancelButton.setOnClickListener(this);
+
         String userId = ((User) Hawk.get(Constants.HAWK_USER_DETAILS)).getId();
         UserDatabaseHelper userDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(getActivity());
-        User user = userDatabaseHelper.getUserFromDb(userId);
+        mUser = userDatabaseHelper.getUserFromDb(userId);
 
-        setUserData(user);
+        setUserData();
     }
 
-    private void setUserData(User user) {
-
-        Picasso.get().load(Uri.parse(user.getAvatarUrl()))
+    private void setUserData() {
+        Picasso.get().load(Uri.parse(mUser.getAvatarUrl()))
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);
 
-        mBinding.nameEditText.setText(user.getName());
-        mBinding.emailEditText.setText(user.getEmail());
-        mBinding.mobileEditText.setText(user.getMobile());
+        mBinding.nameEditText.setText(mUser.getName());
+        mBinding.emailEditText.setText(mUser.getEmail());
+        mBinding.mobileEditText.setText(mUser.getMobile());
 
         mBinding.ageNumberPicker.setMinValue(Constants.AGE_MIN_VALUE);
         mBinding.ageNumberPicker.setMaxValue(Constants.AGE_MAX_VALUE);
-        mBinding.ageNumberPicker.setValue(Integer.parseInt(user.getAge()));
+        mBinding.ageNumberPicker.setValue(Integer.parseInt(mUser.getAge()));
 
-        if (user.getGender().equalsIgnoreCase(Constants.GENDER_FEMALE)) {
+        if (mUser.getGender().equalsIgnoreCase(Constants.GENDER_FEMALE)) {
             mBinding.femaleRadioButton.setChecked(true);
-        } else if (user.getGender().equalsIgnoreCase(Constants.GENDER_MALE)) {
+        } else if (mUser.getGender().equalsIgnoreCase(Constants.GENDER_MALE)) {
             mBinding.maleRadioButton.setChecked(true);
         }
-
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.update_button:
+                updateProfileDetails();
+                break;
+
+            case R.id.cancel_button:
+                cancelProfileDetails();
+                break;
+        }
+    }
+
+    private void cancelProfileDetails() {
+        AlertUtil.createYesNoAlert(getActivity(), "Warning!", "This action will result in losing the entered data. Are you sure you want to proceeed?", new AlertUtil.OnAlertClickListener() {
+            @Override
+            public void onPositive(DialogInterface dialog) {
+                getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
+
+            @Override
+            public void onNegative(DialogInterface dialog) {
+                dialog.dismiss();
+            }
+        }).show();
+    }
+
+    private void updateProfileDetails() {
+
+    }
 }
