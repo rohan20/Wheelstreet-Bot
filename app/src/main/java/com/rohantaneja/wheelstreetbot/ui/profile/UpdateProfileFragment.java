@@ -145,8 +145,6 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     public void showImageSelector() {
         if (new PermissionUtils((BaseActivity) getActivity()).checkForImagePermission())
             mBinding.bottomSheetMembers.showWithSheetView(mBottomSheetBinding.getRoot());
-        else
-            showToast("Permission not granted");
     }
 
 

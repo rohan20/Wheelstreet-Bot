@@ -98,7 +98,17 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
         //set name and avatar for home screen
         mBinding.hiTextView.setText(getString(R.string.hi_name, user.getName()));
-        Picasso.get().load(Uri.parse(user.getAvatarUrl()))
+
+        String pathOrUrl;
+
+        //set user image
+        if (user.getIsAvatarFromPath().equalsIgnoreCase(Constants.IS_AVATAR_FROM_PATH_TRUE)) {
+            pathOrUrl = user.getAvatarPath();
+        } else {
+            pathOrUrl = user.getAvatarUrl();
+        }
+
+        Picasso.get().load(pathOrUrl)
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);
