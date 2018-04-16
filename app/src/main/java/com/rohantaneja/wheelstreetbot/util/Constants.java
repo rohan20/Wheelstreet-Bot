@@ -47,4 +47,10 @@ public class Constants {
     public enum FRAGMENTS {
         VIEW_PROFILE, UPDATE_PROFILE, SUBMIT_SURVEY
     }
+
+    public interface PERMISSION_REQUEST {
+        int REQUEST_MEDIA_PERMISSION = 2011;
+        int REQUEST_ALL_PERMISSION = 2012;
+
+    }
 }

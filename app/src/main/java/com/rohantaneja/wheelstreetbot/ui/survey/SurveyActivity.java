@@ -137,6 +137,7 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
             case Constants.TYPE_INTEGER:
                 //check if valid integer
 //                if (!StringUtil.isValidIntegerValue(String.valueOf(answer))) {
+                //changing this from integer to long to let the user enter their 10-digit mobile number (should be type "mobile" from API in the ideal casegit )
                 if (!StringUtil.isValidLongValue(String.valueOf(answer))) {
                     setValidationError(getString(R.string.valid_answer_integer));
                     return;
