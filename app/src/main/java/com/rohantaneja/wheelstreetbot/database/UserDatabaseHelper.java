@@ -38,9 +38,9 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_USER_TABLE =
             "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
 
-    public static UserDatabaseHelper getUserDatabaseHelperInstance(Context context) {
+    public static synchronized UserDatabaseHelper getUserDatabaseHelperInstance(Context context) {
         if (sUserDatabaseHelper == null)
-            sUserDatabaseHelper = new UserDatabaseHelper(context);
+            sUserDatabaseHelper = new UserDatabaseHelper(context.getApplicationContext());
 
         return sUserDatabaseHelper;
     }
