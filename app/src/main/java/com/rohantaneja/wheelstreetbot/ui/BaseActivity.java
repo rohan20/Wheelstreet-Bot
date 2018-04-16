@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -173,6 +175,10 @@ public class BaseActivity extends AppCompatActivity {
         pushFragment(fragmentId, null, animationType);
     }
 
+    public void pushFragment(FRAGMENTS fragmentId, int containerViewId, ANIMATION_TYPE animationType) {
+        pushFragment(fragmentId, null, containerViewId, true, animationType);
+    }
+
     public BaseFragment pushFragment(FRAGMENTS fragmentId, Bundle args) {
         return pushFragment(fragmentId, args, R.id.profile_container_frame_layout, true, ANIMATION_TYPE.DEFAULT);
     }
@@ -197,4 +203,27 @@ public class BaseActivity extends AppCompatActivity {
         return pushFragment(fragmentId, args, containerViewId, addToBackStack, false, animationType);
     }
 
+    //hide keyboard methods
+    public void hideKeyboard() {
+        try {
+            hideKeyboard(getCurrentFocus());
+
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
+    public void hideKeyboard(View view) {
+        try {
+            if (view != null) {
+                view.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
 }

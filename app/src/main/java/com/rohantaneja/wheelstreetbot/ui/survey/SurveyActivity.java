@@ -12,6 +12,7 @@ import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
 import com.rohantaneja.wheelstreetbot.model.QuestionsResponse;
 import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
+import com.rohantaneja.wheelstreetbot.util.AlertUtil;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.rohantaneja.wheelstreetbot.util.Constants.FRAGMENTS;
 import com.rohantaneja.wheelstreetbot.util.StringUtil;
@@ -152,7 +153,9 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
             displayNextQuestion();
         else {
             mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
-            pushFragment(FRAGMENTS.SUBMIT_SURVEY, Constants.ANIMATION_TYPE.SLIDE);
+            showProgressDialog("Please wait...");
+            hideKeyboard();
+            pushFragment(FRAGMENTS.SUBMIT_SURVEY, R.id.survey_container_frame_layout, Constants.ANIMATION_TYPE.SLIDE);
         }
     }
 
