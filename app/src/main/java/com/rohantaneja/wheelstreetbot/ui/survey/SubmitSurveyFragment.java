@@ -110,6 +110,7 @@ public class SubmitSurveyFragment extends BaseFragment implements View.OnClickLi
 
         if(!NetworkUtil.isNetworkAvailable()){
             showToast(getString(R.string.no_internet));
+            ((BaseActivity) getActivity()).hideProgressDialog();
             return;
         }
 
