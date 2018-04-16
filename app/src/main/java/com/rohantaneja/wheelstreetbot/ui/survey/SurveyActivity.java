@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
-import com.rohantaneja.wheelstreetbot.adapter.QuestionAnswerRecyclerViewAdapter;
+import com.rohantaneja.wheelstreetbot.adapter.SurveyRecyclerViewAdapter;
 import com.rohantaneja.wheelstreetbot.databinding.ActivitySurveyBinding;
 import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
 import com.rohantaneja.wheelstreetbot.model.QuestionsResponse;
 import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
-import com.rohantaneja.wheelstreetbot.util.AlertUtil;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.rohantaneja.wheelstreetbot.util.Constants.FRAGMENTS;
 import com.rohantaneja.wheelstreetbot.util.StringUtil;
@@ -28,7 +28,7 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
 
     private static final String TAG = SurveyActivity.class.getName();
     private ActivitySurveyBinding mBinding;
-    private QuestionAnswerRecyclerViewAdapter mQuestionAnswerRecyclerViewAdapter;
+    private SurveyRecyclerViewAdapter mQuestionAnswerRecyclerViewAdapter;
 
     private List<QuestionAnswer> questionsList;
     private List<QuestionAnswer> questionAnswerList;
@@ -48,7 +48,7 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initQuestionAnswerChatView() {
-        mQuestionAnswerRecyclerViewAdapter = new QuestionAnswerRecyclerViewAdapter(this);
+        mQuestionAnswerRecyclerViewAdapter = new SurveyRecyclerViewAdapter(this);
         mBinding.chatRecyclerView.setAdapter(mQuestionAnswerRecyclerViewAdapter);
         questionAnswerList = new ArrayList<>();
         mQuestionAnswerRecyclerViewAdapter.updateQuestionAnswerList(questionAnswerList);
@@ -155,6 +155,8 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
             mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
             showProgressDialog("Please wait...");
             hideKeyboard();
+            Hawk.put(Constants.IS_SURVEY_COMPLETE, true);
+            Hawk.put(Constants.SURVEY_QUESTIONS_LIST, questionsList);
             pushFragment(FRAGMENTS.SUBMIT_SURVEY, R.id.survey_container_frame_layout, Constants.ANIMATION_TYPE.SLIDE);
         }
     }

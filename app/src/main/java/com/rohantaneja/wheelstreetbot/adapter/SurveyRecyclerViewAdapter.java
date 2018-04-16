@@ -11,6 +11,7 @@ import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.adapter.viewholder.QuestionAnswerViewholder;
 import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
 import com.rohantaneja.wheelstreetbot.model.User;
+import com.rohantaneja.wheelstreetbot.ui.survey.SurveyActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 
 import java.util.ArrayList;
@@ -19,18 +20,24 @@ import java.util.List;
 /**
  * Created by rohantaneja on 15/04/18.
  */
-public class QuestionAnswerRecyclerViewAdapter extends RecyclerView.Adapter<QuestionAnswerViewholder> {
+public class SurveyRecyclerViewAdapter extends RecyclerView.Adapter<QuestionAnswerViewholder> {
 
     private final Context context;
     private List<QuestionAnswer> questionsList;
     private String userAvatarUrl;
+    private boolean isFromCompletedSurvey;
 
-    public QuestionAnswerRecyclerViewAdapter(Context context) {
+    public SurveyRecyclerViewAdapter(Context context, boolean isFromCompletedSurvey) {
+        this.context = context;
+        this.isFromCompletedSurvey = isFromCompletedSurvey;
+        userAvatarUrl = ((User) Hawk.get(Constants.HAWK_USER_DETAILS)).getAvatarUrl();
+    }
+
+    public SurveyRecyclerViewAdapter(Context context) {
         questionsList = new ArrayList<>();
         this.context = context;
-
+        this.isFromCompletedSurvey = false;
         userAvatarUrl = ((User) Hawk.get(Constants.HAWK_USER_DETAILS)).getAvatarUrl();
-        // TODO: 15/04/18 Retrieve user image url here from SharedPrefs
     }
 
     public void updateQuestionAnswerList(List<QuestionAnswer> questionsList) {
@@ -41,7 +48,7 @@ public class QuestionAnswerRecyclerViewAdapter extends RecyclerView.Adapter<Ques
     @Override
     public QuestionAnswerViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_question_answer, parent, false);
-        return new QuestionAnswerViewholder(v, userAvatarUrl);
+        return new QuestionAnswerViewholder(v, userAvatarUrl, isFromCompletedSurvey);
     }
 
     @Override

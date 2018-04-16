@@ -26,6 +26,9 @@ public class Constants {
     public static final String IS_AVATAR_FROM_PATH_TRUE = "true";
     public static final String IS_AVATAR_FROM_PATH_FALSE = "false";
 
+    public static final String IS_SURVEY_COMPLETE = "is_survey_complete";
+    public static final String SURVEY_QUESTIONS_LIST = "survey_questions_list";
+
     public static final int AGE_MIN_VALUE = 14;
     public static final int AGE_MAX_VALUE = 120;
 

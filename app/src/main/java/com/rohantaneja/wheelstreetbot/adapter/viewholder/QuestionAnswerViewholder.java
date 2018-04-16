@@ -20,14 +20,23 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
 
     private ItemQuestionAnswerBinding mBinding;
     private String mAvatarUrl;
+    private boolean mIsFromCompletedSurvey;
 
-    public QuestionAnswerViewholder(View itemView, String avatarUrl) {
+    public QuestionAnswerViewholder(View itemView, String avatarUrl, boolean isFromCompletedSurvey) {
         super(itemView);
         mBinding = DataBindingUtil.bind(itemView);
         mAvatarUrl = avatarUrl;
+        mIsFromCompletedSurvey = isFromCompletedSurvey;
     }
 
     public void bindData(final QuestionAnswer questionAnswer) {
+        if (mIsFromCompletedSurvey)
+            bindCompletedSurveyData(questionAnswer);
+        else
+            bindOngoingSurveyData(questionAnswer);
+    }
+
+    private void bindOngoingSurveyData(final QuestionAnswer questionAnswer) {
         if (questionAnswer.getAnswer() == null) {
             mBinding.answerGroup.setVisibility(View.GONE);
         } else {
@@ -46,5 +55,18 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
                 mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
             }
         }, Constants.NEXT_QUESTION_DELAY);
+    }
+
+    private void bindCompletedSurveyData(QuestionAnswer questionAnswer) {
+        //set question
+        mBinding.chatQuestionImageView.setImageResource(R.drawable.wheelstreet_logo);
+        mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
+
+        //set answer
+        mBinding.chatAnswerTextView.setText(questionAnswer.getAnswer().toString());
+        Picasso.get().load(mAvatarUrl)
+                .placeholder(R.drawable.ic_account_circle_black_48dp)
+                .error(R.drawable.ic_account_circle_black_48dp)
+                .into(mBinding.chatAnswerImageView);
     }
 }
