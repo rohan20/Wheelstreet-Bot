@@ -1,11 +1,10 @@
 package com.rohantaneja.wheelstreetbot.ui;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,7 +17,7 @@ import com.rohantaneja.wheelstreetbot.model.User;
 import com.rohantaneja.wheelstreetbot.ui.profile.ProfileActivity;
 import com.rohantaneja.wheelstreetbot.ui.profile.UpdateProfileFragment;
 import com.rohantaneja.wheelstreetbot.ui.profile.ViewProfileFragment;
-import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.ui.survey.SubmitSurveyFragment;
 import com.rohantaneja.wheelstreetbot.util.Constants.ANIMATION_TYPE;
 import com.rohantaneja.wheelstreetbot.util.Constants.FRAGMENTS;
 
@@ -121,6 +120,9 @@ public class BaseActivity extends AppCompatActivity {
                 break;
             case UPDATE_PROFILE:
                 fragment = new UpdateProfileFragment();
+                break;
+            case SUBMIT_SURVEY:
+                fragment = new SubmitSurveyFragment();
                 break;
         }
         return fragment;

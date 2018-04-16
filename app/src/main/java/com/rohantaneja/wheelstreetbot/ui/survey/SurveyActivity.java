@@ -13,6 +13,7 @@ import com.rohantaneja.wheelstreetbot.model.QuestionsResponse;
 import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.util.Constants.FRAGMENTS;
 import com.rohantaneja.wheelstreetbot.util.StringUtil;
 
 import java.util.ArrayList;
@@ -149,8 +150,10 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         //if all questions haven't been answered, display the next question
         if (questionAnswerList.size() < questionsList.size())
             displayNextQuestion();
-        else
+        else {
             mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
+            pushFragment(FRAGMENTS.SUBMIT_SURVEY, Constants.ANIMATION_TYPE.SLIDE);
+        }
     }
 
     private void displayNextQuestion() {

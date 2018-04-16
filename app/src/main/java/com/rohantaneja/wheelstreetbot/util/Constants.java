@@ -36,6 +36,6 @@ public class Constants {
     }
 
     public enum FRAGMENTS {
-        VIEW_PROFILE, UPDATE_PROFILE, VIEW_QUESTION_ANSWER, UPDATE_QUESTION_ANSWER
+        VIEW_PROFILE, UPDATE_PROFILE, SUBMIT_SURVEY
     }
 }
