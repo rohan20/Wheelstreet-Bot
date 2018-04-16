@@ -18,14 +18,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.auth.LoginActivity"
-            android:label="Login to Wheelstreet">
+            android:label="Login to Wheelstreet"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.BaseActivity" />
+        <activity
+            android:name=".ui.BaseActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -34,10 +37,13 @@
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -47,15 +53,20 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.HomeActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.survey.SurveyActivity"
-            android:label="Survey" />
+            android:label="Survey"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.profile.ProfileActivity"
-            android:label="Profile" />
+            android:label="Profile"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name=".util.GenericFileProvider"
             android:authorities="${applicationId}.provider"
