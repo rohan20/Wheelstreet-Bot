@@ -1,189 +1,196 @@
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.flipboard.bottomsheet.BottomSheetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/bottom_sheet_members"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:background="@android:color/white"
         tools:context="com.rohantaneja.wheelstreetbot.ui.profile.UpdateProfileFragment">
 
-        <android.support.constraint.ConstraintLayout
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:padding="24dp">
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar_image_view"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/wheelstreet_logo"
-                app:civ_border_color="@android:color/black"
-                app:civ_border_width="0.5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/name_text_input_layout"
-                android:layout_width="0dp"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/avatar_image_view">
+                android:background="@android:color/white"
+                android:padding="24dp">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/name_edit_text"
-                    android:layout_width="match_parent"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar_image_view"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/wheelstreet_logo"
+                    app:civ_border_color="@android:color/black"
+                    app:civ_border_width="0.5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/name_text_input_layout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
-                    android:inputType="textPersonName"
-                    android:maxLength="20"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="@android:color/black" />
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/avatar_image_view">
 
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:inputType="textPersonName"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/email_text_input_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name_text_input_layout">
+                </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/email_edit_text"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/email_text_input_layout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="@android:color/black" />
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/name_text_input_layout">
 
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/email_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/mobile_text_input_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/email_text_input_layout">
+                </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/mobile_edit_text"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/mobile_text_input_layout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Mobile Number"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="@android:color/black" />
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/email_text_input_layout">
 
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/mobile_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mobile Number"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+                </android.support.design.widget.TextInputLayout>
 
-            <NumberPicker
-                android:id="@+id/age_number_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toStartOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/mobile_text_input_layout" />
-
-            <TextView
-                android:id="@+id/age_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Age"
-                app:layout_constraintBottom_toBottomOf="@id/age_number_picker"
-                app:layout_constraintEnd_toStartOf="@id/age_number_picker"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/age_number_picker" />
-
-            <TextView
-                android:id="@+id/gender_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Gender"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toTopOf="@id/age_number_picker" />
-
-            <RadioGroup
-                android:id="@+id/gender_radio_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/gender_text_view">
-
-                <RadioButton
-                    android:id="@+id/male_radio_button"
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male" />
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
 
-                <RadioButton
-                    android:id="@+id/female_radio_button"
+                <NumberPicker
+                    android:id="@+id/age_number_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Female" />
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@id/mobile_text_input_layout" />
 
-            </RadioGroup>
+                <TextView
+                    android:id="@+id/age_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    app:layout_constraintBottom_toBottomOf="@id/age_number_picker"
+                    app:layout_constraintEnd_toStartOf="@id/age_number_picker"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/age_number_picker" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+                <TextView
+                    android:id="@+id/gender_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Gender"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="@id/age_number_picker" />
 
-            <Button
-                android:id="@+id/cancel_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="22dp"
-                android:background="@drawable/button_background_drawable"
-                android:text="Cancel"
-                app:layout_constraintEnd_toStartOf="@id/guideline_2"
-                app:layout_constraintTop_toBottomOf="@id/age_number_picker" />
+                <RadioGroup
+                    android:id="@+id/gender_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@id/gender_text_view">
 
-            <Button
-                android:id="@+id/update_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="22dp"
-                android:background="@drawable/button_background_drawable"
-                android:text="Update"
-                app:layout_constraintStart_toEndOf="@id/guideline_2"
-                app:layout_constraintTop_toBottomOf="@id/age_number_picker" />
+                    <RadioButton
+                        android:id="@+id/male_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male" />
 
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+                    <RadioButton
+                        android:id="@+id/female_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Female" />
+
+                </RadioGroup>
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/button_background_drawable"
+                    android:text="Cancel"
+                    app:layout_constraintEnd_toStartOf="@id/guideline_2"
+                    app:layout_constraintTop_toBottomOf="@id/age_number_picker" />
+
+                <Button
+                    android:id="@+id/update_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/button_background_drawable"
+                    android:text="Update"
+                    app:layout_constraintStart_toEndOf="@id/guideline_2"
+                    app:layout_constraintTop_toBottomOf="@id/age_number_picker" />
+
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+    </com.flipboard.bottomsheet.BottomSheetLayout>
 </layout>
