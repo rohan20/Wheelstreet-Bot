@@ -58,7 +58,9 @@ public class SubmitSurveyFragment extends BaseFragment implements View.OnClickLi
 
     private void initUI() {
         mBinding.confirmAndSubmitButton.setOnClickListener(this);
-        ((BaseActivity) getActivity()).hideProgressDialog();
+        if (((BaseActivity) getActivity()) != null) {
+            ((BaseActivity) getActivity()).hideProgressDialog();
+        }
 
         displayFinishedSurvey();
     }
@@ -66,10 +68,14 @@ public class SubmitSurveyFragment extends BaseFragment implements View.OnClickLi
     private void displayFinishedSurvey() {
         mFinishedSurveyAdapter = new SurveyRecyclerViewAdapter(getActivity(), true);
         mBinding.finishedSurveyRecyclerView.setAdapter(mFinishedSurveyAdapter);
-        mFinishedSurveyList = Hawk.contains(Constants.SURVEY_QUESTIONS_LIST) ? (List<QuestionAnswer>) Hawk.get(Constants.SURVEY_QUESTIONS_LIST) : new ArrayList<QuestionAnswer>();
+
+
+        mFinishedSurveyList = Hawk.contains(Constants.ONGOING_SURVEY_QUESTIONS_LIST) ? (List<QuestionAnswer>) Hawk.get(Constants.ONGOING_SURVEY_QUESTIONS_LIST) : new ArrayList<QuestionAnswer>();
         if (mFinishedSurveyList.size() == 0) {
             showToast("No survey found. Please try again.");
+            getActivity().finish();
         }
+
         mFinishedSurveyAdapter.updateQuestionAnswerList(mFinishedSurveyList);
     }
 
@@ -84,7 +90,9 @@ public class SubmitSurveyFragment extends BaseFragment implements View.OnClickLi
 
     private void submitSurvey() {
 
-        ((BaseActivity) getActivity()).showProgressDialog("Submitting survey, please wait...");
+        if (((BaseActivity) getActivity()) != null) {
+            ((BaseActivity) getActivity()).showProgressDialog("Submitting survey, please wait...");
+        }
 
         RetrofitAdapter retrofitAdapter = new RetrofitAdapter(Constants.BASE_URL);
         SubmittedSurveyRequest surveyRequest = new SubmittedSurveyRequest();
@@ -104,11 +112,15 @@ public class SubmitSurveyFragment extends BaseFragment implements View.OnClickLi
             public void onResponse(Call<SubmittedSurveyResponse> call, Response<SubmittedSurveyResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, response.body().getData());
-                    if (response.body().getStatus() == Constants.SURVEY_SUBMITTED_SUCCESSFULL) {
+                    if (response.body().getStatus() == Constants.SURVEY_SUBMITTED_SUCCESSFULLY) {
                         showToast(getString(R.string.survey_submitted_successfully));
-                        getActivity().finish();
+
+                        //delete saved questions and answers
+                        Hawk.delete(Constants.ONGOING_SURVEY_QUESTIONS_LIST);
+                        Hawk.delete(Constants.IS_SURVEY_COMPLETE);
 
                         ((BaseActivity) getActivity()).hideProgressDialog();
+                        getActivity().finish();
                     } else {
                         Log.d(TAG, response.body().getData());
                         showToast("An error has occurred. Please try later.");
@@ -120,7 +132,9 @@ public class SubmitSurveyFragment extends BaseFragment implements View.OnClickLi
             @Override
             public void onFailure(Call<SubmittedSurveyResponse> call, Throwable t) {
                 Log.d(TAG, t.getLocalizedMessage());
-                ((BaseActivity) getActivity()).hideProgressDialog();
+                if (((BaseActivity) getActivity()) != null) {
+                    ((BaseActivity) getActivity()).hideProgressDialog();
+                }
             }
         });
 

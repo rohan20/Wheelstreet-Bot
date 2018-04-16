@@ -35,7 +35,6 @@ public class Constants {
     public static final int NEXT_QUESTION_DELAY = 600;
 
     public static final String ONGOING_SURVEY_QUESTIONS_LIST = "ongoing_survey_questions_list";
-    public static final String COMPLETED_SURVEY_QUESTIONS_LIST = "completed_survey_questions_list";
     public static final String IS_SURVEY_COMPLETE = "is_survey_complete";
 
     public static final int SURVEY_SUBMITTED_SUCCESSFULLY = 1;

@@ -1,11 +1,11 @@
 package com.rohantaneja.wheelstreetbot.adapter.viewholder;
 
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.databinding.ItemQuestionAnswerBinding;
 import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
@@ -48,13 +48,12 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
                     .into(mBinding.chatAnswerImageView);
         }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mBinding.chatQuestionImageView.setImageResource(R.drawable.wheelstreet_logo);
-                mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
-            }
-        }, Constants.NEXT_QUESTION_DELAY);
+        if (Hawk.contains(Constants.ONGOING_SURVEY_QUESTIONS_LIST)) {
+            setQuestion(questionAnswer);
+        } else {
+            addDelayToQuestions(questionAnswer);
+        }
+
     }
 
     private void bindCompletedSurveyData(QuestionAnswer questionAnswer) {
@@ -63,10 +62,24 @@ public class QuestionAnswerViewholder extends RecyclerView.ViewHolder {
         mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
 
         //set answer
-        mBinding.chatAnswerTextView.setText(questionAnswer.getAnswer().toString());
+        mBinding.chatAnswerTextView.setText(String.valueOf(questionAnswer.getAnswer()));
         Picasso.get().load(mAvatarUrl)
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.chatAnswerImageView);
+    }
+
+    private void addDelayToQuestions(final QuestionAnswer questionAnswer) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setQuestion(questionAnswer);
+            }
+        }, Constants.NEXT_QUESTION_DELAY);
+    }
+
+    private void setQuestion(QuestionAnswer questionAnswer) {
+        mBinding.chatQuestionImageView.setImageResource(R.drawable.wheelstreet_logo);
+        mBinding.chatQuestionTextView.setText(questionAnswer.getQuestion());
     }
 }

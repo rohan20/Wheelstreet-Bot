@@ -18,6 +18,7 @@ import com.rohantaneja.wheelstreetbot.util.Constants.FRAGMENTS;
 import com.rohantaneja.wheelstreetbot.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import retrofit2.Call;
@@ -67,8 +68,13 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
 
                     //store all questions in a list
                     questionsList = response.body().getData();
-                    //but, display only the first question to the user
-                    questionAnswerList.add(questionsList.get(0));
+
+                    if (Hawk.contains(Constants.ONGOING_SURVEY_QUESTIONS_LIST) && ((List<QuestionAnswer>) Hawk.get(Constants.ONGOING_SURVEY_QUESTIONS_LIST)).size() > 0)
+                        //if there are questions that the user has seen before
+                        questionAnswerList.addAll((Collection<? extends QuestionAnswer>) Hawk.get(Constants.ONGOING_SURVEY_QUESTIONS_LIST));
+                    else
+                        //if user wasn't in the middle of a survey, display only the first question to the user
+                        questionAnswerList.add(questionsList.get(0));
 
                     mQuestionAnswerRecyclerViewAdapter.updateQuestionAnswerList(questionAnswerList);
                     hideProgressDialog();
@@ -91,7 +97,8 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         switch (view.getId()) {
             case R.id.send_image_view:
                 //If user returned from SubmitSurveyFragment and then pressed send, check if all questions are answered and navigate to SubmitSurveyFragment again
-                if (questionAnswerList.size() == questionsList.size() && questionsList.get(questionAnswerList.size() - 1).getAnswer() != null)
+//                if (questionAnswerList.size() == questionsList.size() && questionsList.get(questionAnswerList.size() - 1).getAnswer() != null)
+                if ((Boolean) Hawk.contains(Constants.IS_SURVEY_COMPLETE) && (Boolean) Hawk.get(Constants.IS_SURVEY_COMPLETE))
                     navigateToConfirmAndSubmitSurvey();
                 else
                     submitAnswerForCurrentQuestion();
@@ -153,8 +160,10 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         mBinding.answerEditText.setText("");
 
         //if all questions haven't been answered, display the next question
-        if (questionAnswerList.size() < questionsList.size())
+        if (questionAnswerList.size() < questionsList.size()){
+            Hawk.put(Constants.IS_SURVEY_COMPLETE, false);
             displayNextQuestion();
+        }
         else {
             mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
             navigateToConfirmAndSubmitSurvey();
@@ -164,7 +173,7 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
     private void navigateToConfirmAndSubmitSurvey() {
         showProgressDialog("Please wait...");
         Hawk.put(Constants.IS_SURVEY_COMPLETE, true);
-        Hawk.put(Constants.SURVEY_QUESTIONS_LIST, questionsList);
+        Hawk.put(Constants.ONGOING_SURVEY_QUESTIONS_LIST, questionsList);
         hideKeyboard();
         pushFragment(FRAGMENTS.SUBMIT_SURVEY, R.id.survey_container_frame_layout, Constants.ANIMATION_TYPE.SLIDE);
     }
@@ -187,5 +196,12 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
     private void removeValidationError() {
         mBinding.answerTextInputLayout.setErrorEnabled(false);
         mBinding.answerTextInputLayout.setError("");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (Hawk.contains(Constants.IS_SURVEY_COMPLETE))
+            Hawk.put(Constants.ONGOING_SURVEY_QUESTIONS_LIST, questionAnswerList);
     }
 }

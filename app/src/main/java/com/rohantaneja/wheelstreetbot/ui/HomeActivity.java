@@ -45,10 +45,21 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             setUserDetails((User) Hawk.get(Constants.HAWK_USER_DETAILS));
             Hawk.put(Constants.FROM_UPDATE_PROFILE, false);
         }
+
+        if (Hawk.contains(Constants.IS_SURVEY_COMPLETE)) {
+            mBinding.surveyDescTextView.setText("Please continue the survey from where you left off...");
+            mBinding.surveyButton.setText("Continue Survey");
+        }
     }
 
     private void initUI() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+
+//        if (Hawk.contains(Constants.ONGOING_SURVEY_QUESTIONS_LIST)) {
+//            mBinding.surveyDescTextView.setText("Please continue the survey from where you left off...");
+//            mBinding.surveyButton.setText("Continue Survey");
+//        }
+
         mBinding.surveyButton.setOnClickListener(this);
         hideProgressDialog();
 
