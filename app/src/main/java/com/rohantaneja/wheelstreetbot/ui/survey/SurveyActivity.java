@@ -13,6 +13,7 @@ import com.rohantaneja.wheelstreetbot.model.QuestionsResponse;
 import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
 import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,14 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
 
             case Constants.TYPE_INTEGER:
                 //check if valid integer
+                if (!StringUtil.isValidIntegerValue(String.valueOf(answer))) {
+                    mBinding.answerTextInputLayout.setErrorEnabled(true);
+                    mBinding.answerTextInputLayout.setError("Invalid integer value");
+                    return;
+                } else {
+                    mBinding.answerTextInputLayout.setErrorEnabled(false);
+                    mBinding.answerTextInputLayout.setError("");
+                }
                 break;
 
             default:
