@@ -78,8 +78,7 @@ public class ImagePickerUtils extends android.support.v4.app.Fragment {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             //Some devices doesn't work without it.
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-//                    Utils.getUri(getContext(),file,true));
-                    Utils.getUri(getContext(), file, false));
+                    Utils.getUri(getContext(), file, true));
             startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
         } else {
             Intent galleryIntent = new Intent(
@@ -121,8 +120,7 @@ public class ImagePickerUtils extends android.support.v4.app.Fragment {
                     //Some devices doesn't work without it.
 
                     cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-//                            Utils.getUri(getContext(),file,true));
-                            Utils.getUri(getContext(), file, false));
+                            Utils.getUri(getContext(), file, true));
 //                    cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
                     startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);

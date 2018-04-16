@@ -94,7 +94,7 @@ public class ViewProfileFragment extends BaseFragment {
 
         //set user image
         if (user.getIsAvatarFromPath().equalsIgnoreCase(Constants.IS_AVATAR_FROM_PATH_TRUE)) {
-            pathOrUrl = user.getAvatarPath();
+            pathOrUrl = Constants.PICASSO_FILE_PREFIX + user.getAvatarPath();
         } else {
             pathOrUrl = user.getAvatarUrl();
         }

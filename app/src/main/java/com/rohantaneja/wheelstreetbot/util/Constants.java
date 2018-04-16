@@ -39,6 +39,8 @@ public class Constants {
 
     public static final int SURVEY_SUBMITTED_SUCCESSFULLY = 1;
 
+    public static final String PICASSO_FILE_PREFIX = "file://";
+
 
     public enum ANIMATION_TYPE {
         SLIDE, FADE, DEFAULT, NONE

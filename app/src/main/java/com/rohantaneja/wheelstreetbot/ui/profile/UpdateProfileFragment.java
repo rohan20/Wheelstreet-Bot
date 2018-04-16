@@ -243,7 +243,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     @Override
     public void success(String name, String path) {
 
-        Picasso.get().load(Uri.parse(path))
+        Picasso.get().load(Constants.PICASSO_FILE_PREFIX + path)
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);

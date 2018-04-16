@@ -103,7 +103,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
         //set user image
         if (user.getIsAvatarFromPath().equalsIgnoreCase(Constants.IS_AVATAR_FROM_PATH_TRUE)) {
-            pathOrUrl = user.getAvatarPath();
+            pathOrUrl = Constants.PICASSO_FILE_PREFIX + user.getAvatarPath();
         } else {
             pathOrUrl = user.getAvatarUrl();
         }

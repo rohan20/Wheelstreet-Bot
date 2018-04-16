@@ -28,7 +28,7 @@ import java.util.Locale;
 
 public class BitmapUtils {
 
-    public static final String TEMP_IMG_DIRECTORY = "Your App name";
+    public static final String TEMP_IMG_DIRECTORY = "Wheelstreet";
     private static final String IMG_EXTENSION = ".jpg";
     public static final int DEFAULT_PHOTO_WIDH = 540;
     public static final int DEFAULT_PHOTO_HEIGHT = 960;
