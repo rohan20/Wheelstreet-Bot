@@ -90,7 +90,11 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.send_image_view:
-                submitAnswerForCurrentQuestion();
+                //If user returned from SubmitSurveyFragment and then pressed send, check if all questions are answered and navigate to SubmitSurveyFragment again
+                if (questionAnswerList.size() == questionsList.size() && questionsList.get(questionAnswerList.size() - 1).getAnswer() != null)
+                    navigateToConfirmAndSubmitSurvey();
+                else
+                    submitAnswerForCurrentQuestion();
                 break;
         }
     }
@@ -153,12 +157,16 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
             displayNextQuestion();
         else {
             mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
-            showProgressDialog("Please wait...");
-            hideKeyboard();
-            Hawk.put(Constants.IS_SURVEY_COMPLETE, true);
-            Hawk.put(Constants.SURVEY_QUESTIONS_LIST, questionsList);
-            pushFragment(FRAGMENTS.SUBMIT_SURVEY, R.id.survey_container_frame_layout, Constants.ANIMATION_TYPE.SLIDE);
+            navigateToConfirmAndSubmitSurvey();
         }
+    }
+
+    private void navigateToConfirmAndSubmitSurvey() {
+        showProgressDialog("Please wait...");
+        Hawk.put(Constants.IS_SURVEY_COMPLETE, true);
+        Hawk.put(Constants.SURVEY_QUESTIONS_LIST, questionsList);
+        hideKeyboard();
+        pushFragment(FRAGMENTS.SUBMIT_SURVEY, R.id.survey_container_frame_layout, Constants.ANIMATION_TYPE.SLIDE);
     }
 
     private void displayNextQuestion() {
