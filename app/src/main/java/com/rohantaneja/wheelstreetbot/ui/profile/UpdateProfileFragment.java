@@ -26,6 +26,7 @@ import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.rohantaneja.wheelstreetbot.util.ImagePickerUtils;
 import com.rohantaneja.wheelstreetbot.util.PermissionUtils;
 import com.rohantaneja.wheelstreetbot.util.StringUtil;
+import com.rohantaneja.wheelstreetbot.util.Utils;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -81,7 +82,8 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
     }
 
     private void setUserData() {
-        Picasso.get().load(Uri.parse(mUser.getAvatarUrl()))
+
+        Picasso.get().load(Utils.getPicassoPath(mUser))
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);
@@ -248,7 +250,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);
 
-        mUser.setAvatarPath(path);
+        mUser.setAvatarPath(Constants.PICASSO_FILE_PREFIX + path);
         mUser.setIsAvatarFromPath(Constants.IS_AVATAR_FROM_PATH_TRUE);
     }
 

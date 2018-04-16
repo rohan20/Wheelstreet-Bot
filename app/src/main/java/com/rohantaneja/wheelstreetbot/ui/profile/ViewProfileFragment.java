@@ -23,6 +23,7 @@ import com.rohantaneja.wheelstreetbot.ui.BaseActivity;
 import com.rohantaneja.wheelstreetbot.ui.BaseFragment;
 import com.rohantaneja.wheelstreetbot.util.Constants;
 import com.rohantaneja.wheelstreetbot.util.StringUtil;
+import com.rohantaneja.wheelstreetbot.util.Utils;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -90,16 +91,7 @@ public class ViewProfileFragment extends BaseFragment {
         mBinding.ageTextView.setText(getString(R.string.display_age, user.getAge()));
         mBinding.mobileTextView.setText(getString(R.string.display_mobile_number, user.getMobile()));
 
-        String pathOrUrl;
-
-        //set user image
-        if (user.getIsAvatarFromPath().equalsIgnoreCase(Constants.IS_AVATAR_FROM_PATH_TRUE)) {
-            pathOrUrl = Constants.PICASSO_FILE_PREFIX + user.getAvatarPath();
-        } else {
-            pathOrUrl = user.getAvatarUrl();
-        }
-
-        Picasso.get().load(pathOrUrl)
+        Picasso.get().load(Utils.getPicassoPath(user))
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);

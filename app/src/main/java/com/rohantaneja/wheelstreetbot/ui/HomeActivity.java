@@ -18,6 +18,7 @@ import com.rohantaneja.wheelstreetbot.ui.auth.LoginActivity;
 import com.rohantaneja.wheelstreetbot.ui.profile.ProfileActivity;
 import com.rohantaneja.wheelstreetbot.ui.survey.SurveyActivity;
 import com.rohantaneja.wheelstreetbot.util.Constants;
+import com.rohantaneja.wheelstreetbot.util.Utils;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -99,16 +100,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         //set name and avatar for home screen
         mBinding.hiTextView.setText(getString(R.string.hi_name, user.getName()));
 
-        String pathOrUrl;
-
-        //set user image
-        if (user.getIsAvatarFromPath().equalsIgnoreCase(Constants.IS_AVATAR_FROM_PATH_TRUE)) {
-            pathOrUrl = Constants.PICASSO_FILE_PREFIX + user.getAvatarPath();
-        } else {
-            pathOrUrl = user.getAvatarUrl();
-        }
-
-        Picasso.get().load(pathOrUrl)
+        Picasso.get().load(Utils.getPicassoPath(user))
                 .placeholder(R.drawable.ic_account_circle_black_48dp)
                 .error(R.drawable.ic_account_circle_black_48dp)
                 .into(mBinding.avatarImageView);

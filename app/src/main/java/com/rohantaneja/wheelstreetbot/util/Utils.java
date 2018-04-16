@@ -16,6 +16,9 @@ import android.view.Display;
 import android.view.View;
 
 import com.rohantaneja.wheelstreetbot.BuildConfig;
+import com.rohantaneja.wheelstreetbot.R;
+import com.rohantaneja.wheelstreetbot.model.User;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -133,6 +136,21 @@ public class Utils {
 
         DateFormat format = new SimpleDateFormat("MM-dd-yyyy");
         return format.format(date);
+    }
+
+    public static String getPicassoPath(User user) {
+
+        String pathOrUrl;
+
+        //set user image
+        if (user.getIsAvatarFromPath().equalsIgnoreCase(Constants.IS_AVATAR_FROM_PATH_TRUE)) {
+            pathOrUrl = Constants.PICASSO_FILE_PREFIX + user.getAvatarPath();
+        } else {
+            pathOrUrl = user.getAvatarUrl();
+        }
+
+        return pathOrUrl;
+
     }
 
 
