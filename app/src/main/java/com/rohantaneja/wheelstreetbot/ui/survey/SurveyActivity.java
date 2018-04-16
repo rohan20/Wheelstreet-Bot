@@ -173,7 +173,7 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
     private void navigateToConfirmAndSubmitSurvey() {
         showProgressDialog("Please wait...");
         Hawk.put(Constants.IS_SURVEY_COMPLETE, true);
-        Hawk.put(Constants.ONGOING_SURVEY_QUESTIONS_LIST, questionsList);
+        Hawk.put(Constants.ONGOING_SURVEY_QUESTIONS_LIST, questionAnswerList);
         hideKeyboard();
         pushFragment(FRAGMENTS.SUBMIT_SURVEY, R.id.survey_container_frame_layout, Constants.ANIMATION_TYPE.SLIDE);
     }

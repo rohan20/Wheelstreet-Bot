@@ -47,8 +47,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         }
 
         if (Hawk.contains(Constants.IS_SURVEY_COMPLETE)) {
-            mBinding.surveyDescTextView.setText("Please continue the survey from where you left off...");
-            mBinding.surveyButton.setText("Continue Survey");
+            mBinding.surveyDescTextView.setText(R.string.continue_survey_desc);
+            mBinding.surveyButton.setText(R.string.continue_survey);
+        } else {
+            mBinding.surveyDescTextView.setText(getString(R.string.take_survey_desc));
+            mBinding.surveyButton.setText(getString(R.string.take_survey));
         }
     }
 

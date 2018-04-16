@@ -21,4 +21,9 @@
     <string name="valid_answer_string">This answer cannot be left blank</string>
     <string name="confirm_and_submit">Confirm and Submit</string>
     <string name="survey_submitted_successfully">Survey submitted successfully. Thank you!</string>
+    <string name="take_survey_desc">To help us serve you better, please take a short survey</string>
+    <string name="welcome_message">Welcome to Wheelstreet!</string>
+    <string name="take_survey">Take Survey</string>
+    <string name="continue_survey_desc">Please continue the survey from where you left off...</string>
+    <string name="continue_survey">Continue Survey</string>
 </resources>
