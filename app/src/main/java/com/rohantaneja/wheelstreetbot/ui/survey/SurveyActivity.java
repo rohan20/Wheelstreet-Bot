@@ -136,7 +136,8 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
 
             case Constants.TYPE_INTEGER:
                 //check if valid integer
-                if (!StringUtil.isValidIntegerValue(String.valueOf(answer))) {
+//                if (!StringUtil.isValidIntegerValue(String.valueOf(answer))) {
+                if (!StringUtil.isValidLongValue(String.valueOf(answer))) {
                     setValidationError(getString(R.string.valid_answer_integer));
                     return;
                 } else
@@ -160,11 +161,10 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         mBinding.answerEditText.setText("");
 
         //if all questions haven't been answered, display the next question
-        if (questionAnswerList.size() < questionsList.size()){
+        if (questionAnswerList.size() < questionsList.size()) {
             Hawk.put(Constants.IS_SURVEY_COMPLETE, false);
             displayNextQuestion();
-        }
-        else {
+        } else {
             mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
             navigateToConfirmAndSubmitSurvey();
         }
