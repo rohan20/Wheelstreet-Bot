@@ -103,26 +103,41 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         switch (currentQuestion.getAnswerType()) {
             case Constants.TYPE_BOOLEAN:
                 //check if valid boolean
+                if (!StringUtil.isValidBooleanTypeAnswer(String.valueOf(answer))) {
+                    setValidationError(getString(R.string.valid_answer_boolean));
+                    return;
+                } else
+                    removeValidationError();
+
                 break;
 
             case Constants.TYPE_FLOAT:
                 //check if valid float
+                if (!StringUtil.isValidFloatValue(String.valueOf(answer))) {
+                    setValidationError(getString(R.string.valid_answer_float));
+                    return;
+                } else
+                    removeValidationError();
+
                 break;
 
             case Constants.TYPE_INTEGER:
                 //check if valid integer
                 if (!StringUtil.isValidIntegerValue(String.valueOf(answer))) {
-                    mBinding.answerTextInputLayout.setErrorEnabled(true);
-                    mBinding.answerTextInputLayout.setError("Invalid integer value");
+                    setValidationError(getString(R.string.valid_answer_integer));
                     return;
-                } else {
-                    mBinding.answerTextInputLayout.setErrorEnabled(false);
-                    mBinding.answerTextInputLayout.setError("");
-                }
+                } else
+                    removeValidationError();
+
                 break;
 
             default:
-
+                //check if valid string
+                if (StringUtil.isNullOrEmpty(String.valueOf(answer))) {
+                    setValidationError(getString(R.string.valid_answer_string));
+                    return;
+                } else
+                    removeValidationError();
         }
 
         questionAnswerList.get(currentQuestionIndex).setAnswer(answer);
@@ -146,5 +161,15 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         mQuestionAnswerRecyclerViewAdapter.updateQuestionAnswerList(questionAnswerList);
         mBinding.chatRecyclerView.getLayoutManager().smoothScrollToPosition(mBinding.chatRecyclerView, null, questionAnswerList.size() - 1);
 
+    }
+
+    private void setValidationError(String validationMessage) {
+        mBinding.answerTextInputLayout.setErrorEnabled(true);
+        mBinding.answerTextInputLayout.setError(validationMessage);
+    }
+
+    private void removeValidationError() {
+        mBinding.answerTextInputLayout.setErrorEnabled(false);
+        mBinding.answerTextInputLayout.setError("");
     }
 }

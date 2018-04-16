@@ -47,4 +47,23 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean isValidFloatValue(String s) {
+        if (isNullOrEmpty(s))
+            return false;
+
+        try {
+            Float.parseFloat(s);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidBooleanTypeAnswer(String s) {
+        if (isNullOrEmpty(s))
+            return false;
+
+        return s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("no");
+    }
 }

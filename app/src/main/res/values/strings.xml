@@ -15,4 +15,8 @@
     //facebook
     <string name="facebook_app_id">618651541812831</string>
     <string name="fb_login_protocol_scheme">fb618651541812831</string>
+    <string name="valid_answer_boolean">Please provide a \'Yes\' or \'No\' response</string>
+    <string name="valid_answer_float">Please provide a valid integer/decimal value</string>
+    <string name="valid_answer_integer">Please provide a valid integer value</string>
+    <string name="valid_answer_string">This answer cannot be left blank</string>
 </resources>
