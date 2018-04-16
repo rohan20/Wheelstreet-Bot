@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.orhanobut.hawk.Hawk;
 import com.rohantaneja.wheelstreetbot.R;
@@ -139,7 +137,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.survey_button:
-                Intent i = new Intent(this, QuestionsActivity.class);
+                Intent i = new Intent(this, SurveyActivity.class);
                 startActivity(i);
                 break;
         }

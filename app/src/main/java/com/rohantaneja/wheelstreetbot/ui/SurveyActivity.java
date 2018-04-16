@@ -8,6 +8,7 @@ import android.view.View;
 import com.rohantaneja.wheelstreetbot.R;
 import com.rohantaneja.wheelstreetbot.adapter.QuestionAnswerRecyclerViewAdapter;
 import com.rohantaneja.wheelstreetbot.databinding.ActivityQuestionsBinding;
+import com.rohantaneja.wheelstreetbot.databinding.ActivitySurveyBinding;
 import com.rohantaneja.wheelstreetbot.model.QuestionAnswer;
 import com.rohantaneja.wheelstreetbot.model.QuestionsResponse;
 import com.rohantaneja.wheelstreetbot.network.RetrofitAdapter;
@@ -20,10 +21,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class QuestionsActivity extends BaseActivity implements View.OnClickListener {
+public class SurveyActivity extends BaseActivity implements View.OnClickListener {
 
-    private static final String TAG = QuestionsActivity.class.getName();
-    private ActivityQuestionsBinding mBinding;
+    private static final String TAG = SurveyActivity.class.getName();
+    private ActivitySurveyBinding mBinding;
     private QuestionAnswerRecyclerViewAdapter mQuestionAnswerRecyclerViewAdapter;
 
     private List<QuestionAnswer> questionsList;
@@ -36,7 +37,7 @@ public class QuestionsActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initUI() {
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_questions);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_survey);
         mBinding.sendImageView.setOnClickListener(this);
 
         initQuestionAnswerChatView();

@@ -9,7 +9,7 @@
         android:background="@android:color/white"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        tools:context="com.rohantaneja.wheelstreetbot.ui.QuestionsActivity">
+        tools:context="com.rohantaneja.wheelstreetbot.ui.SurveyActivity">
 
         <ImageView
             android:id="@+id/send_image_view"
