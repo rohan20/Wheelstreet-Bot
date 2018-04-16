@@ -13,10 +13,8 @@ public class Constants {
 
     public static final String BASE_URL = "https://api.wheelstreet.com/v1/test/";
 
+    //user profile
     public static final String HAWK_USER_DETAILS = "hawk_user_details";
-
-    public static final int NEXT_QUESTION_DELAY = 600;
-    public static final int SURVEY_SUBMITTED_SUCCESSFULL = 1;
 
     public static final String GENDER_MALE = "Male";
     public static final String GENDER_FEMALE = "Female";
@@ -27,13 +25,21 @@ public class Constants {
     public static final String IS_AVATAR_FROM_PATH_TRUE = "true";
     public static final String IS_AVATAR_FROM_PATH_FALSE = "false";
 
-    public static final String IS_SURVEY_COMPLETE = "is_survey_complete";
-    public static final String SURVEY_QUESTIONS_LIST = "survey_questions_list";
 
     public static final int AGE_MIN_VALUE = 14;
     public static final int AGE_MAX_VALUE = 120;
 
     public static final String FROM_UPDATE_PROFILE = "from_update_profile";
+
+    //survey
+    public static final int NEXT_QUESTION_DELAY = 600;
+
+    public static final String ONGOING_SURVEY_QUESTIONS_LIST = "ongoing_survey_questions_list";
+    public static final String COMPLETED_SURVEY_QUESTIONS_LIST = "completed_survey_questions_list";
+    public static final String IS_SURVEY_COMPLETE = "is_survey_complete";
+
+    public static final int SURVEY_SUBMITTED_SUCCESSFULLY = 1;
+
 
     public enum ANIMATION_TYPE {
         SLIDE, FADE, DEFAULT, NONE
