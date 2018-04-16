@@ -38,6 +38,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         initUI();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Hawk.contains(Constants.FROM_UPDATE_PROFILE) && (Boolean) Hawk.get(Constants.FROM_UPDATE_PROFILE)) {
+            setUserDetails((User) Hawk.get(Constants.HAWK_USER_DETAILS));
+            Hawk.put(Constants.FROM_UPDATE_PROFILE, false);
+        }
+    }
+
     private void initUI() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         mBinding.surveyButton.setOnClickListener(this);

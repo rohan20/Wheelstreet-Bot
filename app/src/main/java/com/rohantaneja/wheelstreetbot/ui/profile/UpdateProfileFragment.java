@@ -142,6 +142,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
 
             showToast("Profile Updated");
             Hawk.put(Constants.FROM_UPDATE_PROFILE, true);
+            Hawk.put(Constants.HAWK_USER_DETAILS, mUser);
 
             getActivity().finish();
         }
@@ -158,7 +159,9 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
             mBinding.mobileTextInputLayout.setErrorEnabled(false);
             mBinding.mobileTextInputLayout.setError("");
             return true;
-        } else if (StringUtil.isValidMobileNumber(mBinding.mobileEditText.getText().toString())) {
+        }
+
+        if (!StringUtil.isValidMobileNumber(mBinding.mobileEditText.getText().toString())) {
             mBinding.mobileTextInputLayout.setErrorEnabled(true);
             mBinding.mobileTextInputLayout.setError("Invalid Mobile Number");
             return false;
