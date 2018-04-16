@@ -146,7 +146,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         showProgressDialog("Signing out...");
 
         LoginManager.getInstance().logOut();
-
+        Hawk.deleteAll();
         //go back to login screen
         Intent loginIntent = new Intent(this, LoginActivity.class);
         startActivity(loginIntent);
