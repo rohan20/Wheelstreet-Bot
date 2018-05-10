@@ -96,10 +96,15 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
         mBinding.ageNumberPicker.setMaxValue(Constants.AGE_MAX_VALUE);
         mBinding.ageNumberPicker.setValue(Integer.parseInt(mUser.getAge()));
 
-        if (mUser.getGender().equalsIgnoreCase(Constants.GENDER_FEMALE)) {
-            mBinding.femaleRadioButton.setChecked(true);
-        } else if (mUser.getGender().equalsIgnoreCase(Constants.GENDER_MALE)) {
-            mBinding.maleRadioButton.setChecked(true);
+        if (mUser.getGender() == null) {
+            mBinding.maleRadioButton.setChecked(false);
+            mBinding.femaleRadioButton.setChecked(false);
+        } else {
+            if (mUser.getGender().equalsIgnoreCase(Constants.GENDER_FEMALE))
+                mBinding.femaleRadioButton.setChecked(true);
+            else if (mUser.getGender().equalsIgnoreCase(Constants.GENDER_MALE))
+                mBinding.maleRadioButton.setChecked(true);
+
         }
     }
 
@@ -179,7 +184,7 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
                 mUser.setIsAgeOverridden(Constants.IS_AGE_OVERRIDDEN_FALSE);
             else
                 mUser.setIsAgeOverridden(Constants.IS_AGE_OVERRIDDEN_TRUE);
-            
+
             mUser.setAge(String.valueOf(mBinding.ageNumberPicker.getValue()));
 
             //set gender if selected by user
