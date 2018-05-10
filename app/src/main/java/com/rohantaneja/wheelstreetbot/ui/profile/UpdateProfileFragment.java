@@ -183,9 +183,12 @@ public class UpdateProfileFragment extends BaseFragment implements View.OnClickL
             mUser.setAge(String.valueOf(mBinding.ageNumberPicker.getValue()));
 
             //set gender if selected by user
-            if (!StringUtil.isNullOrEmpty(mUser.getGender())) {
-                mUser.setGender(mBinding.femaleRadioButton.isChecked() ? Constants.GENDER_FEMALE : Constants.GENDER_MALE);
-            }
+            if (mBinding.femaleRadioButton.isChecked())
+                mUser.setGender(Constants.GENDER_FEMALE);
+            else if (mBinding.maleRadioButton.isChecked())
+                mUser.setGender(Constants.GENDER_MALE);
+            else
+                mUser.setGender(null);
 
             //save updated user to database
             UserDatabaseHelper userDatabaseHelper = UserDatabaseHelper.getUserDatabaseHelperInstance(getActivity());
