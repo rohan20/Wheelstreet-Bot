@@ -61,10 +61,10 @@ public class User {
     public String getGender() {
 
         //To change "male" to "Male" and "female" to "Female"
-        if (gender.equalsIgnoreCase(Constants.GENDER_MALE))
+        if (gender != null && gender.equalsIgnoreCase(Constants.GENDER_MALE))
             gender = Constants.GENDER_MALE;
 
-        else if (gender.equalsIgnoreCase(Constants.GENDER_FEMALE))
+        else if (gender != null && gender.equalsIgnoreCase(Constants.GENDER_FEMALE))
             gender = Constants.GENDER_FEMALE;
 
         return gender;
